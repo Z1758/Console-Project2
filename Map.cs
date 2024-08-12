@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ConsoleProject2
 {
-   
-  
+
+
 
     static public class Map
     {
-     
-
+       
+        
 
         public static int width = 12;
         public static int height = 12;
@@ -133,7 +134,7 @@ namespace ConsoleProject2
         }
 
 
-        static public void ArrDraw()
+        static public void DynamicDraw()
         {
 
             for (int i = enemyPathPos; i <= widthEnemyPath; i++)
@@ -168,7 +169,16 @@ namespace ConsoleProject2
                 pixelNum[i, enemyPathPos] = PixelType.ENEMYPATH;
             }
 
+            for(int i = centerPos ; i <= heightCenter; i++)
+            {
+                for (int j = centerPos ; j <= widthCenter; j++)
+                {
+                    pixel[i, j] = center;
 
+
+                    pixelNum[i, j] = PixelType.USERSPACE;
+                }
+            }
         }
 
 
@@ -205,32 +215,44 @@ namespace ConsoleProject2
 
                         continue;
                     }
-                    if (pixelNum[i, j] == PixelType.WALL)
+                    switch (pixelNum[i, j])
                     {
-                        //벽
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        
+                        case PixelType.WALL:
+                            //벽
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            break;
+                        case PixelType.USERSPACE:
+                            //플레이어 공간
+                            Console.ForegroundColor = ConsoleColor.Black;
+                            break;
+                        case PixelType.ENEMYPATH:
+                            //적 이동 경로
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            break;
+                        case PixelType.GRADE_C:
+                            //타워 등급
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            break;
+                        case PixelType.GRADE_B:
+                            //타워 등급
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            break;
+                        case PixelType.GRADE_A:
+                            //타워 등급
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            break;
+                        case PixelType.GRADE_S:
+                            //타워 등급
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            break;
+                        default:
+                            Console.ForegroundColor = ConsoleColor.White;
+                            break;
+                    }
 
-                    }
-                    else if (pixelNum[i, j] == PixelType.USERSPACE)
-                    { 
-                        //플레이어 공간
-                        Console.ForegroundColor = ConsoleColor.White;
-                       
-                    }
-                    else if (pixelNum[i, j] == PixelType.ENEMYPATH)
-                    {
-                        //적 이동 경로
-                        Console.ForegroundColor = ConsoleColor.DarkCyan;                      
-                    }
-                    
-                    else
-                    {
-                        Console.ForegroundColor = ConsoleColor.White;
-                    }
+                  
 
-
-                    if (pixelNum[i, j] >= PixelType.ENEMIES)
+                    if (10 + PixelType.ENEMY + 1 > pixelNum[i, j] && pixelNum[i, j] >= PixelType.ENEMIES)
                     {
                         //겹쳐있는 적
                         Console.ForegroundColor = ConsoleColor.Green;
@@ -266,6 +288,7 @@ namespace ConsoleProject2
                 Console.ResetColor();
                 Console.WriteLine();
             }
+
 
         }
 

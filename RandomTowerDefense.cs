@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace ConsoleProject2
 {
     public class RandomTowerDefense
     {
+     
         static GameManager gameManager;
         static public void Init()
         {
@@ -19,8 +21,8 @@ namespace ConsoleProject2
 
         static public void Update()
         {
-            Map.ArrDraw();
-            gameManager.CheckEnemy();
+            Map.DynamicDraw();
+            gameManager.CheckDraw();
 
             Map.DrawPixel();
         }
@@ -31,17 +33,18 @@ namespace ConsoleProject2
 
             //임시 나중에 수정
             gameManager.CurrentEnemyInfoSet();
-           
-
-           
-        
-          
 
 
+
+
+
+
+            gameManager.SetTower();
 
             while (true)
             {
                 Update();
+            
             }
 
         }

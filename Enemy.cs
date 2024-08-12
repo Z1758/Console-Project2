@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace ConsoleProject2
 {
-    public enum EnemyMoveState
+    public enum EnemyMoveState 
     {
         Down, Right, Up, Left, END
     }
 
-    public class Enemy
+    public class Enemy : IDynamicObject
     {
-        public int posX, posY;
+        private int posY;
         private int maxHp;
         private int curHp;
         private double moveSpeed;
@@ -21,7 +21,12 @@ namespace ConsoleProject2
   
         private EnemyMoveState moveState = EnemyMoveState.Down;
 
-        public int curTick;
+        public int moveTick;
+        private int posX;
+
+        public int CurHp { get => curHp;  }
+        public int PosX { get => posX;  }
+        public int PosY { get => posY;  }
 
         public event Action<Enemy> DisableEvent;
 
@@ -33,15 +38,15 @@ namespace ConsoleProject2
             moveSpeed = 0;
             dropGold = 0;
 
-            curTick = 0;
+            moveTick = 0;
         }
 
         public void EnemyInitStatus(int maxHp, double moveSpeed, int dropGold )
         {
             moveState = EnemyMoveState.Down;
             posX = Map.enemyPathPos; posY = Map.enemyPathPos;
-           
-            curTick = 0;
+
+            moveTick = 0;
 
             this.maxHp = maxHp;
             curHp = maxHp;
@@ -53,18 +58,18 @@ namespace ConsoleProject2
         public void MoveEnemy(object sender, System.Timers.ElapsedEventArgs e)
         {
 
-            curTick++;
+            moveTick++;
 
             //테스트용 임시
           
-            TakeDamage();
+           // TakeDamage();
             
 
-            if (curTick < moveSpeed)
+            if (moveTick < moveSpeed)
             {
                 return;
             }
-            curTick = 0;
+            moveTick = 0;
             switch (moveState)
             {
                 case EnemyMoveState.Down:
@@ -85,31 +90,31 @@ namespace ConsoleProject2
       
         }
 
-        public void TakeDamage()
+        public void TakeDamage(int atk)
         {
-            if (curHp <= 0)
+            if (CurHp <= 0)
             {
                 return;
             }
-            curHp -= 5;
+            curHp -= atk;
    
-            if (curHp <= 0)
+            if (CurHp <= 0)
             {
-                Die();
+                Disable();
             }
         }
 
-        private void Die()
+
+        public void Disable()
         {
             DisableEvent(this);
-           
         }
-
+   
         public void GoDown()
         {
             posY++;
 
-            if (posY == Map.heightEnemyPath)
+            if (PosY == Map.heightEnemyPath)
             {
                 moveState = EnemyMoveState.Right;
             }
@@ -119,7 +124,7 @@ namespace ConsoleProject2
         public void GoRight()
         {
             posX++;
-            if (posX == Map.widthEnemyPath)
+            if (PosX == Map.widthEnemyPath)
             {
                 moveState = EnemyMoveState.Up;
             }
@@ -131,7 +136,7 @@ namespace ConsoleProject2
         public void GoUp()
         {
             posY--;
-            if (posY == Map.enemyPathPos)
+            if (PosY == Map.enemyPathPos)
             {
                 moveState = EnemyMoveState.Left;
             }
@@ -141,13 +146,13 @@ namespace ConsoleProject2
         public void GoLeft()
         {
             posX--;
-            if (posX == Map.enemyPathPos)
+            if (PosX == Map.enemyPathPos)
             {
                 moveState = EnemyMoveState.Down;
             }
 
         }
 
-        
+      
     }
 }

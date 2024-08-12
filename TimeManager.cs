@@ -10,7 +10,8 @@ namespace ConsoleProject2
     {
         static public int roundCount = 60;
 
-        static System.Timers.Timer tickTimer;
+        static System.Timers.Timer enemyTickTimer;
+        static System.Timers.Timer towerTickTimer;
         static System.Timers.Timer roundTimer;
 
         static public event Action RoundEvent;
@@ -18,8 +19,11 @@ namespace ConsoleProject2
 
         static public void TimerInit()
         {
-            tickTimer = new System.Timers.Timer();
-            tickTimer.Interval = 100; //0.1초마다
+            enemyTickTimer = new System.Timers.Timer();
+            enemyTickTimer.Interval = 100; //0.1초마다
+
+            towerTickTimer = new System.Timers.Timer();
+            towerTickTimer.Interval = 100; //0.1초마다
 
 
             roundTimer = new System.Timers.Timer();
@@ -27,7 +31,8 @@ namespace ConsoleProject2
             roundTimer.Elapsed += new System.Timers.ElapsedEventHandler(RoundTimer);
 
 
-            tickTimer.Start();
+            enemyTickTimer.Start();
+            towerTickTimer.Start();
             roundTimer.Start();
         }
 
@@ -35,6 +40,11 @@ namespace ConsoleProject2
         {
 
             roundCount--;
+            if (roundCount == 0)
+            {
+                roundCount = 60;
+            }
+
             RoundEvent();
 
         }
@@ -43,15 +53,26 @@ namespace ConsoleProject2
         static public void AddEnemyMoveEvent(Enemy enemy)
         {
 
-            tickTimer.Elapsed += new System.Timers.ElapsedEventHandler(enemy.MoveEnemy);
+            enemyTickTimer.Elapsed += new System.Timers.ElapsedEventHandler(enemy.MoveEnemy);
         }
 
         static public void RemoveEnemyMoveEvent(Enemy enemy)
         {
 
-            tickTimer.Elapsed -= new System.Timers.ElapsedEventHandler(enemy.MoveEnemy);
+            enemyTickTimer.Elapsed -= new System.Timers.ElapsedEventHandler(enemy.MoveEnemy);
         }
 
+        static public void AddTowerAttackEvent(Tower tower)
+        {
+
+            towerTickTimer.Elapsed += new System.Timers.ElapsedEventHandler(tower.AttackTower);
+        }
+
+        static public void RemoveTowerAttackEvent(Tower tower)
+        {
+
+            towerTickTimer.Elapsed -= new System.Timers.ElapsedEventHandler(tower.AttackTower);
+        }
 
 
     }
