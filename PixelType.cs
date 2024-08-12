@@ -23,41 +23,29 @@ namespace ConsoleProject2
         public const int GRADE_C_RANGE = 1003;
         public const int GRADE_C_END = 1004;
 
+        public const int GRADE_B_START = 2001;
+        public const int GRADE_B_POWER = 2001;
+        public const int GRADE_B_SPEED = 2002;
+        public const int GRADE_B_RANGE = 2003;
+        public const int GRADE_B_END = 2004;
+
+        public const int GRADE_A_START = 3001;
+        public const int GRADE_A_POWER = 3001;
+        public const int GRADE_A_SPEED = 3002;
+        public const int GRADE_A_RANGE = 3003;
+        public const int GRADE_A_END = 3004;
+
+        public const int GRADE_S_START = 4001;
+        public const int GRADE_S_POWER = 4001;
+        public const int GRADE_S_SPEED = 4002;
+        public const int GRADE_S_RANGE = 4003;
+        public const int GRADE_S_END = 4004;
+
         public const int GRADE_C = 1000;
         public const int GRADE_B = 2000;
         public const int GRADE_A = 3000;
         public const int GRADE_S = 4000;
 
-
-       
-      
-
-        /* 타워 종류
-       Console.ForegroundColor = ConsoleColor.Yellow;
-       Console.WriteLine("㉿㉿㉿");
-       Console.WriteLine("♨♨♨");
-       Console.WriteLine("☎☎☎");
-       Console.ResetColor();
-
-       Console.ForegroundColor = ConsoleColor.Red;
-       Console.WriteLine("♬♬♬");
-       Console.WriteLine("●●●");
-       Console.WriteLine("♣♣♣");
-       Console.ResetColor();
-
-       Console.ForegroundColor = ConsoleColor.Green;
-       Console.WriteLine("★★★");
-       Console.WriteLine("◈◈◈");
-       Console.WriteLine("♥♥♥");
-       Console.ResetColor();
-
-       Console.ForegroundColor = ConsoleColor.Cyan;
-       Console.WriteLine("☆☆☆");
-       Console.WriteLine("◇◇◇");
-       Console.WriteLine("♡♡♡");
-       Console.ResetColor();
-       return;
-       */
 
         public const int END = 99999;
     }

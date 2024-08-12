@@ -18,6 +18,7 @@ namespace ConsoleProject2
 
             gameManager = GameManager.Instance();
             gameManager.SetPlayer(player);
+            gameManager.CurrentEnemyInfoSet();
 
             TimeManager.TimerInit();
         }
@@ -31,17 +32,14 @@ namespace ConsoleProject2
             Map.DrawPixel();
 
             gameManager.InputKey();
-
+            Console.WriteLine(gameManager.output);
            // ClearBuffer();
         }
         static void Main(string[] args)
         {
+            
+            
             Init();
-
-
-            //임시 나중에 수정
-            gameManager.CurrentEnemyInfoSet();
-
 
 
 
@@ -54,7 +52,7 @@ namespace ConsoleProject2
                 Update();
                 
             }
-
+            
         }
 
         //키 입력 버퍼 지우기

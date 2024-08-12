@@ -19,7 +19,12 @@ namespace ConsoleProject2
 
     static public class StageManager
     {
-        private static int userGold;
+        static private int userGold;
+
+        static public int currentStage;
+        static public int enemyLimitCount;
+        static public int enemySetOneStage;
+        static public int enemyCount;
 
         public static Dictionary<int,EnemyInfo> EnemyInformations;
         
@@ -39,19 +44,27 @@ namespace ConsoleProject2
             EnemyInformations = new Dictionary<int, EnemyInfo>();
             SetEnemyInformation();
 
+            enemyLimitCount = 80;
+            enemySetOneStage = 50;
             userGold = 1000;
+            currentStage = 1;
+            enemyCount = 0;
         }
 
 
 
         static public void SetEnemyInformation()
         {
-            EnemyInformations.Add(1, new EnemyInfo { hp = 100,  moveSpeed = 10, dropGold = 10 });
+            EnemyInformations.Add(1, new EnemyInfo { hp = 100,  moveSpeed = 8, dropGold = 10 });
             EnemyInformations.Add(2, new EnemyInfo { hp = 150, moveSpeed = 9, dropGold = 10 });
             EnemyInformations.Add(3, new EnemyInfo { hp = 100, moveSpeed = 3, dropGold = 10 });
             EnemyInformations.Add(4, new EnemyInfo { hp = 500, moveSpeed = 20, dropGold = 10 });
-            EnemyInformations.Add(5, new EnemyInfo { hp = 400, moveSpeed = 10, dropGold = 10 });
-          
+            EnemyInformations.Add(5, new EnemyInfo { hp = 400, moveSpeed = 8, dropGold = 10 });
+            EnemyInformations.Add(6, new EnemyInfo { hp = 500, moveSpeed = 8, dropGold = 10 });
+            EnemyInformations.Add(7, new EnemyInfo { hp = 650, moveSpeed = 9, dropGold = 10 });
+            EnemyInformations.Add(8, new EnemyInfo { hp = 500, moveSpeed = 3, dropGold = 10 });
+            EnemyInformations.Add(9, new EnemyInfo { hp = 900, moveSpeed = 20, dropGold = 10 });
+            EnemyInformations.Add(10, new EnemyInfo{ hp = 12000, moveSpeed = 7, dropGold = 100 });
         }
 
       

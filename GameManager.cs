@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace ConsoleProject2
+﻿namespace ConsoleProject2
 {
 
     public class GameManager : InputManager
@@ -8,11 +6,7 @@ namespace ConsoleProject2
 
         Player player;
 
-        public int enemyCount;
-
-        static public int enemyLimitCount;
-        static public int enemySetOneStage;
-
+        public string output = "";
 
         public EnemyInfo curEnemyInfo;
 
@@ -26,13 +20,13 @@ namespace ConsoleProject2
 
         private GameManager()
         {
-           
-            enemyLimitCount = 80;
-            enemySetOneStage = 5;
-            enemyCount = 0;
+
+
+
             InitObj();
             TimeManager.RoundEvent += SetEnemyStagePerSecond;
-         
+            TimeManager.NextStage += CurrentEnemyInfoSet;
+
         }
 
         public void SetPlayer(Player player)
@@ -42,10 +36,8 @@ namespace ConsoleProject2
 
         public void SetEnemyStagePerSecond()
         {
-            if (enemyCount < enemySetOneStage)
-            {
-                SetEnemy();
-            }
+            SetEnemy();
+
         }
 
         public void CheckEnemy()
@@ -93,15 +85,15 @@ namespace ConsoleProject2
             return check;
         }
 
-       
+
 
 
         public void ChechkPlayer()
         {
             Map.pixelNum[player.PosY, player.PosX] = PixelType.PLAYER;
         }
-        
-        
+
+
         public void CheckDraw()
         {
             CheckEnemy();
@@ -111,12 +103,12 @@ namespace ConsoleProject2
 
         public void AttackCollider(Tower tower)
         {
-            if(enemyCount == 0)
+            if (StageManager.enemyCount == 0)
             {
                 return;
             }
-           
-            
+
+
             //타워의 범위부터 계산
             /*
             for(int i = tower.PosY - tower.Range ; i < tower.PosY+ tower.Range ; i++)
@@ -156,7 +148,7 @@ namespace ConsoleProject2
                 }
             }
             */
-            
+
             // 제일 먼저 나온적부터 공격
             for (int e = 0; e < activeEnemies.Count; e++)
             {
@@ -181,7 +173,9 @@ namespace ConsoleProject2
                                     activeEnemies[e].TakeDamage(tower.Attack);
                                     tower.AtkTick = 0;
 
-                              
+                                    output = tower.Attack + " 데미지로 공격";
+
+
 
                                     return;
                                 }
@@ -194,30 +188,54 @@ namespace ConsoleProject2
 
 
             }
-           
+
 
 
 
         }
 
-        public bool SetTower()
+        public bool SetTower(int grade)
         {
-            
+
             if (disabledTowerQueue.Count <= 0)
             {
                 return false;
             }
 
-         
+
 
             Random random = new Random();
 
             Tower tower = disabledTowerQueue.Dequeue();
             tower.AttackEvent += AttackCollider;
 
-            tower.RandomInit(random.Next(PixelType.GRADE_C_START, PixelType.GRADE_C_END));
-            
-     
+            //임시 나중에 랜덤 구현
+            if (grade == 5)
+            {
+                tower.RandomInit(random.Next(PixelType.GRADE_C_START, PixelType.GRADE_C_END));
+            }
+            else
+            {
+
+                switch (grade)
+                {
+                    case PixelType.GRADE_C:
+                        tower.RandomInit(random.Next(PixelType.GRADE_B_START, PixelType.GRADE_B_END));
+                        break;
+                    case PixelType.GRADE_B:
+                        tower.RandomInit(random.Next(PixelType.GRADE_A_START, PixelType.GRADE_A_END));
+                        break;
+                    case PixelType.GRADE_A:
+                        tower.RandomInit(random.Next(PixelType.GRADE_S_START, PixelType.GRADE_S_END));
+                        break;
+
+                }
+
+            }
+
+
+
+
             tower.TowerInitStatus(player.PosX, player.PosY);
 
 
@@ -230,14 +248,14 @@ namespace ConsoleProject2
             return true;
         }
 
-        public void DisableTower(Tower tower )
+        public void DisableTower(Tower tower)
         {
             tower.DisableEvent -= DisableTower;
             TimeManager.RemoveTowerAttackEvent(tower);
             activeTowers.Remove(tower);
             disabledTowerQueue.Enqueue(tower);
         }
-      
+
         public void SetEnemy()
         {
             if (disabledEnemyQueue.Count <= 0)
@@ -251,34 +269,35 @@ namespace ConsoleProject2
             TimeManager.AddEnemyMoveEvent(enemy);
 
             activeEnemies.Add(enemy);
-            enemyCount++;
+            StageManager.enemyCount++;
 
-
-            //임시 나중에 수정
-            //curEnemyInfo = StageManager.EnemyInformations[enemyCount];
+    
         }
         public void DisableEnemy(Enemy enemy)
         {
+
             enemy.DisableEvent -= DisableEnemy;
             TimeManager.RemoveEnemyMoveEvent(enemy);
 
             activeEnemies.Remove(enemy);
 
             disabledEnemyQueue.Enqueue(enemy);
+            StageManager.enemyCount--;
+            StageManager.SetGold(enemy.DropGold);
 
-            enemyCount--;
+
         }
 
 
 
         public void InitObj()
         {
-            for (int i = 0; i < enemyLimitCount; i++)
+            for (int i = 0; i < StageManager.enemyLimitCount; i++)
             {
                 disabledEnemyQueue.Enqueue(new Enemy());
             }
 
-            for (int i = 0; i < (Map.widthCenter-2) * (Map.heightCenter-2) ; i++)
+            for (int i = 0; i < (Map.widthCenter - 2) * (Map.heightCenter - 2); i++)
             {
                 disabledTowerQueue.Enqueue(new Tower());
             }
@@ -287,8 +306,7 @@ namespace ConsoleProject2
 
         public void CurrentEnemyInfoSet()
         {
-            //임시 나중에 수정
-            curEnemyInfo = StageManager.EnemyInformations[1];
+            curEnemyInfo = StageManager.EnemyInformations[StageManager.currentStage];
         }
 
 
@@ -298,7 +316,7 @@ namespace ConsoleProject2
             if (gmSingleton == null)
             {
                 gmSingleton = new GameManager();
-                
+
 
             }
 
@@ -308,7 +326,7 @@ namespace ConsoleProject2
 
         public void InputKey()
         {
-           
+
             //매끄러운 키 입력 구현
             if (Console.KeyAvailable)
             {
@@ -317,19 +335,19 @@ namespace ConsoleProject2
                 switch (consoleKey.Key)
                 {
                     case ConsoleKey.RightArrow:
-                        MoveCursor(1,0);
+                        MoveCursor(1, 0);
                         break;
                     case ConsoleKey.LeftArrow:
-                        MoveCursor(-1,0);
+                        MoveCursor(-1, 0);
 
                         break;
 
                     case ConsoleKey.UpArrow:
-                        MoveCursor(0,-1);
+                        MoveCursor(0, -1);
 
                         break;
                     case ConsoleKey.DownArrow:
-                        MoveCursor(0,1);
+                        MoveCursor(0, 1);
                         break;
                     case ConsoleKey.Q:
                         GachaTower();
@@ -340,8 +358,8 @@ namespace ConsoleProject2
                     case ConsoleKey.T:
                         SellTower();
                         break;
-                     default:
-                        
+                    default:
+
                         break;
                 }
             }
@@ -362,11 +380,12 @@ namespace ConsoleProject2
 
         public void GachaTower()
         {
-            if(StageManager.GetGold() >= 50)
+            if (StageManager.GetGold() >= 50)
             {
                 if (CheckTowerCursor() == false)
                 {
-                    SetTower();
+                    //임시 나중에 랜덤 구현
+                    SetTower(5);
                     StageManager.SetGold(-50);
                 }
             }
@@ -394,6 +413,11 @@ namespace ConsoleProject2
             {
                 if (activeTowers[i].PosX == player.PosX && activeTowers[i].PosY == player.PosY)
                 {
+                    if (activeTowers[i].Grade >= PixelType.GRADE_S)
+                    {
+                        return;
+                    }
+
                     type = activeTowers[i].Type;
                     towerIndex[0] = activeTowers[i];
                     break;
@@ -403,8 +427,8 @@ namespace ConsoleProject2
             if (type == 'N')
                 return;
 
-            
-           
+
+
             int cnt = 1;
             for (int i = 0; i < activeTowers.Count; i++)
             {
@@ -425,21 +449,22 @@ namespace ConsoleProject2
                 }
 
             }
-           
-            if (cnt ==3)
+
+            if (cnt == 3)
             {
+                int grade = towerIndex[0].Grade;
                 for (int i = 0; i < cnt; i++)
                 {
-                    
-                        towerIndex[i].Disable();
-                    
-                }
-                //등급 강화 추가 예정
-                SetTower();
 
+                    towerIndex[i].Disable();
+
+                }
+
+
+                SetTower(grade);
 
             }
-          
+
 
 
         }

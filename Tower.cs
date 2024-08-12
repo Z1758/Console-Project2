@@ -54,29 +54,118 @@ namespace ConsoleProject2
             {
                 case PixelType.GRADE_C_POWER:
                     {
-                        attack = 20;
-                        atkSpeed = 3;
+                        attack = 30;
+                        atkSpeed = 10;
                         range = 3;
                         type = '♡';
-                        grade = PixelType.GRADE_C; //중복 코드 나중에 수정
+                        grade = PixelType.GRADE_C; 
                     }
                     break;
                 case PixelType.GRADE_C_SPEED:
                     {
                         attack = 20;
-                        atkSpeed = 3;
+                        atkSpeed = 8;
                         range = 3;
                         type = '☆';
-                        grade = PixelType.GRADE_B;// 중복 코드 나중에 수정
+                        grade = PixelType.GRADE_C;
                     }
                     break;
                 case PixelType.GRADE_C_RANGE:
                     {
                         attack = 20;
-                        atkSpeed = 3;
-                        range = 3;
+                        atkSpeed = 10;
+                        range = 4;
                         type = '◇';
-                        grade = PixelType.GRADE_A;// 중복 코드 나중에 수정
+                        grade = PixelType.GRADE_C;
+                    }
+                    break;
+
+
+                case PixelType.GRADE_B_POWER:
+                    {
+                        attack = 50;
+                        atkSpeed = 9;
+                        range = 4;
+                        type = '♥';
+                        grade = PixelType.GRADE_B;
+                    }
+                    break;
+                case PixelType.GRADE_B_SPEED:
+                    {
+                        attack = 30;
+                        atkSpeed = 7;
+                        range = 4;
+                        type = '★';
+                        grade = PixelType.GRADE_B;
+                    }
+                    break;
+                case PixelType.GRADE_B_RANGE:
+                    {
+                        attack = 30;
+                        atkSpeed = 9;
+                        range = 5;
+                        type = '◈';
+                        grade = PixelType.GRADE_B;
+                    }
+                    break;
+
+
+
+                case PixelType.GRADE_A_POWER:
+                    {
+                        attack = 110;
+                        atkSpeed = 8;
+                        range = 5;
+                        type = '♣';
+                        grade = PixelType.GRADE_A;
+                    }
+                    break;
+                case PixelType.GRADE_A_SPEED:
+                    {
+                        attack = 60;
+                        atkSpeed = 5;
+                        range = 5;
+                        type = '♬';
+                        grade = PixelType.GRADE_A;
+                    }
+                    break;
+                case PixelType.GRADE_A_RANGE:
+                    {
+                        attack = 80;
+                        atkSpeed = 8;
+                        range = 6;
+                        type = '●';
+                        grade = PixelType.GRADE_A;
+                    }
+                    break;
+
+
+
+                case PixelType.GRADE_S_POWER:
+                    {
+                        attack = 180;
+                        atkSpeed = 7;
+                        range = 6;
+                        type = '♨';
+                        grade = PixelType.GRADE_S;
+                    }
+                    break;
+                case PixelType.GRADE_S_SPEED:
+                    {
+                        attack = 80;
+                        atkSpeed = 3;
+                        range = 6;
+                        type = '㉿';
+                        grade = PixelType.GRADE_S;
+                    }
+                    break;
+                case PixelType.GRADE_S_RANGE:
+                    {
+                        attack = 120;
+                        atkSpeed = 7;
+                        range = 8;
+                        type = '☎';
+                        grade = PixelType.GRADE_S;
                     }
                     break;
 

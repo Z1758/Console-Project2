@@ -8,17 +8,21 @@ namespace ConsoleProject2
 {
     static public class TimeManager
     {
-        static public int roundCount = 60;
+        static public int roundTime;
+        static public int roundCount ;
 
         static System.Timers.Timer enemyTickTimer;
         static System.Timers.Timer towerTickTimer;
         static System.Timers.Timer roundTimer;
 
         static public event Action RoundEvent;
-
+        static public event Action NextStage;
 
         static public void TimerInit()
         {
+            roundTime = 60;
+            roundCount = roundTime;
+
             enemyTickTimer = new System.Timers.Timer();
             enemyTickTimer.Interval = 100; //0.1초마다
 
@@ -42,10 +46,14 @@ namespace ConsoleProject2
             roundCount--;
             if (roundCount == 0)
             {
-                roundCount = 60;
+                roundCount = roundTime;
+                StageManager.currentStage++;
+                NextStage();
+
             }
 
-            RoundEvent();
+            if(roundTime - StageManager.enemySetOneStage <= roundCount)
+                RoundEvent();
 
         }
 

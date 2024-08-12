@@ -27,6 +27,7 @@ namespace ConsoleProject2
         public int CurHp { get => curHp;  }
         public int PosX { get => posX;  }
         public int PosY { get => posY;  }
+        public int DropGold { get => dropGold;  }
 
         public event Action<Enemy> DisableEvent;
 
