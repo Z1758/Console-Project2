@@ -192,7 +192,7 @@ namespace ConsoleProject2
 
             Console.CursorVisible = false;
             Console.SetCursorPosition(0, 0);
-
+           
             Console.ForegroundColor = ConsoleColor.White;
 
             Console.WriteLine();

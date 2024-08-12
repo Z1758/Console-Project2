@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace ConsoleProject2
 {
@@ -9,7 +10,7 @@ namespace ConsoleProject2
         static GameManager gameManager;
         static public void Init()
         {
-   
+            
             Map.PixelInit();
             StageManager.StageManagerInit();
             
@@ -31,7 +32,7 @@ namespace ConsoleProject2
 
             gameManager.InputKey();
 
-            ClearBuffer();
+           // ClearBuffer();
         }
         static void Main(string[] args)
         {
@@ -66,4 +67,8 @@ namespace ConsoleProject2
         }
 
     }
+
+
+
+   
 }

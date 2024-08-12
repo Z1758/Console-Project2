@@ -86,7 +86,7 @@ namespace ConsoleProject2
                 if (activeTowers[i].PosX == player.PosX && activeTowers[i].PosY == player.PosY)
                 {
                     check = true;
-                  
+                    break;
                 }
 
             }
@@ -237,7 +237,7 @@ namespace ConsoleProject2
             activeTowers.Remove(tower);
             disabledTowerQueue.Enqueue(tower);
         }
-
+      
         public void SetEnemy()
         {
             if (disabledEnemyQueue.Count <= 0)
@@ -308,6 +308,7 @@ namespace ConsoleProject2
 
         public void InputKey()
         {
+           
             //매끄러운 키 입력 구현
             if (Console.KeyAvailable)
             {
@@ -338,6 +339,9 @@ namespace ConsoleProject2
                         break;
                     case ConsoleKey.T:
                         SellTower();
+                        break;
+                     default:
+                        
                         break;
                 }
             }
@@ -376,7 +380,7 @@ namespace ConsoleProject2
                 {
                     activeTowers[i].Disable();
                     StageManager.SetGold(40);
-
+                    break;
                 }
 
             }
@@ -384,7 +388,60 @@ namespace ConsoleProject2
 
         public void MergeTower()
         {
-    
+            char type = 'N';
+            Tower[] towerIndex = new Tower[3];
+            for (int i = 0; i < activeTowers.Count; i++)
+            {
+                if (activeTowers[i].PosX == player.PosX && activeTowers[i].PosY == player.PosY)
+                {
+                    type = activeTowers[i].Type;
+                    towerIndex[0] = activeTowers[i];
+                    break;
+                }
+
+            }
+            if (type == 'N')
+                return;
+
+            
+           
+            int cnt = 1;
+            for (int i = 0; i < activeTowers.Count; i++)
+            {
+                if (activeTowers[i].Type == type)
+                {
+                    if (towerIndex[0] == activeTowers[i])
+                    {
+                        continue;
+                    }
+
+                    towerIndex[cnt] = activeTowers[i];
+                    cnt++;
+
+                    if (cnt == 3)
+                    {
+                        break;
+                    }
+                }
+
+            }
+           
+            if (cnt ==3)
+            {
+                for (int i = 0; i < cnt; i++)
+                {
+                    
+                        towerIndex[i].Disable();
+                    
+                }
+                //등급 강화 추가 예정
+                SetTower();
+
+
+            }
+          
+
+
         }
     }
 }
