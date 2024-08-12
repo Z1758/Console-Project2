@@ -19,15 +19,30 @@ namespace ConsoleProject2
 
     static public class StageManager
     {
-        public static Dictionary<int,EnemyInfo> EnemyInformations;
+        private static int userGold;
 
-  
+        public static Dictionary<int,EnemyInfo> EnemyInformations;
+        
+        static public void SetGold(int gold)
+        {
+            userGold += gold;
+        }
+
+        static public int GetGold()
+        {
+            return userGold;
+        }
+
 
         static public void StageManagerInit()
         {
             EnemyInformations = new Dictionary<int, EnemyInfo>();
             SetEnemyInformation();
+
+            userGold = 1000;
         }
+
+
 
         static public void SetEnemyInformation()
         {

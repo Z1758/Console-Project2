@@ -46,7 +46,7 @@ namespace ConsoleProject2
 
 
 
-            gameManager.SetTower();
+            
 
             while (true)
             {

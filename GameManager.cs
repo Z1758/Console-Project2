@@ -78,6 +78,24 @@ namespace ConsoleProject2
             }
         }
 
+        public bool CheckTowerCursor()
+        {
+            bool check = false;
+            for (int i = 0; i < activeTowers.Count; i++)
+            {
+                if (activeTowers[i].PosX == player.PosX && activeTowers[i].PosY == player.PosY)
+                {
+                    check = true;
+                  
+                }
+
+            }
+            return check;
+        }
+
+       
+
+
         public void ChechkPlayer()
         {
             Map.pixelNum[player.PosY, player.PosX] = PixelType.PLAYER;
@@ -182,12 +200,16 @@ namespace ConsoleProject2
 
         }
 
-        public void SetTower()
+        public bool SetTower()
         {
-            if (disabledEnemyQueue.Count <= 0)
+            
+            if (disabledTowerQueue.Count <= 0)
             {
-                return;
+                return false;
             }
+
+         
+
             Random random = new Random();
 
             Tower tower = disabledTowerQueue.Dequeue();
@@ -195,17 +217,25 @@ namespace ConsoleProject2
 
             tower.RandomInit(random.Next(PixelType.GRADE_C_START, PixelType.GRADE_C_END));
             
-            //임시 좌표 수정 필요
-            tower.TowerInitStatus(3, 4);
+     
+            tower.TowerInitStatus(player.PosX, player.PosY);
 
 
 
-            //    tower.DisableEvent += DisableTower;
+            tower.DisableEvent += DisableTower;
             TimeManager.AddTowerAttackEvent(tower);
 
             activeTowers.Add(tower);
- 
 
+            return true;
+        }
+
+        public void DisableTower(Tower tower )
+        {
+            tower.DisableEvent -= DisableTower;
+            TimeManager.RemoveTowerAttackEvent(tower);
+            activeTowers.Remove(tower);
+            disabledTowerQueue.Enqueue(tower);
         }
 
         public void SetEnemy()
@@ -238,6 +268,8 @@ namespace ConsoleProject2
 
             enemyCount--;
         }
+
+
 
         public void InitObj()
         {
@@ -297,7 +329,15 @@ namespace ConsoleProject2
                         break;
                     case ConsoleKey.DownArrow:
                         MoveCursor(0,1);
-
+                        break;
+                    case ConsoleKey.Q:
+                        GachaTower();
+                        break;
+                    case ConsoleKey.E:
+                        MergeTower();
+                        break;
+                    case ConsoleKey.T:
+                        SellTower();
                         break;
                 }
             }
@@ -318,12 +358,28 @@ namespace ConsoleProject2
 
         public void GachaTower()
         {
-        
+            if(StageManager.GetGold() >= 50)
+            {
+                if (CheckTowerCursor() == false)
+                {
+                    SetTower();
+                    StageManager.SetGold(-50);
+                }
+            }
         }
 
         public void SellTower()
         {
-           
+            for (int i = 0; i < activeTowers.Count; i++)
+            {
+                if (activeTowers[i].PosX == player.PosX && activeTowers[i].PosY == player.PosY)
+                {
+                    activeTowers[i].Disable();
+                    StageManager.SetGold(40);
+
+                }
+
+            }
         }
 
         public void MergeTower()

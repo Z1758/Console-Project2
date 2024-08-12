@@ -9,19 +9,17 @@ namespace ConsoleProject2
     public class Player
     {
         private int posX, posY;
-        private int gold;
+      
         
 
         private static Player playerSingleton;
 
    
-        public int Gold { get => gold; set => gold = value; }
         public int PosX { get => posX; set => posX = value; }
         public int PosY { get => posY; set => posY = value; }
 
         Player()
         {
-            gold = 100;
             posX = Map.centerPos;
             posY = Map.centerPos;
         }

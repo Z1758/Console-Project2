@@ -196,7 +196,7 @@ namespace ConsoleProject2
             Console.ForegroundColor = ConsoleColor.White;
 
             Console.WriteLine();
-            Console.WriteLine($"           라운드 시간 {TimeManager.roundCount}");
+            Console.WriteLine($"           라운드 시간 {TimeManager.roundCount:00}");
             Console.ResetColor();
 
             for (int i = 0; i < height; i++)
@@ -210,7 +210,10 @@ namespace ConsoleProject2
                         if (i == 5)
                         {
                             Console.ForegroundColor = ConsoleColor.White;
-                            Console.Write("    여기");
+                            Console.Write($"  골드");
+                            Console.Write($"    {StageManager.GetGold():00000}");
+                            
+                           
                         }
 
                         continue;
