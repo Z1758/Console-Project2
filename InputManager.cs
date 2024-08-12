@@ -8,7 +8,11 @@ namespace ConsoleProject2
 {
     public interface InputManager
     {
-      
+        void InputKey();
+        void MoveCursor(int x, int y);
+        void GachaTower();
+        void SellTower();
 
+        void MergeTower();
     }
 }

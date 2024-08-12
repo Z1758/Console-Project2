@@ -245,6 +245,12 @@ namespace ConsoleProject2
                             //타워 등급
                             Console.ForegroundColor = ConsoleColor.Yellow;
                             break;
+                        case PixelType.PLAYER:
+                            //유저 위치
+                            
+                            Console.ForegroundColor = ConsoleColor.Black;
+                            Console.BackgroundColor = ConsoleColor.White;
+                            break;
                         default:
                             Console.ForegroundColor = ConsoleColor.White;
                             break;

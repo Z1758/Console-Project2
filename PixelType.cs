@@ -13,7 +13,7 @@ namespace ConsoleProject2
         public const int WALL = 0;
         public const int USERSPACE = 1;
         public const int ENEMYPATH = 2;
-        
+        public const int PLAYER = 3;
         public const int ENEMY = 4;
         public const int ENEMIES = 5;
 
@@ -27,6 +27,9 @@ namespace ConsoleProject2
         public const int GRADE_B = 2000;
         public const int GRADE_A = 3000;
         public const int GRADE_S = 4000;
+
+
+       
       
 
         /* 타워 종류
@@ -56,6 +59,6 @@ namespace ConsoleProject2
        return;
        */
 
-        public const int END = 9999;
+        public const int END = 99999;
     }
 }

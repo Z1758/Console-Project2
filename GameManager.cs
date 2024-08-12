@@ -3,8 +3,10 @@
 namespace ConsoleProject2
 {
 
-    public class GameManager
+    public class GameManager : InputManager
     {
+
+        Player player;
 
         public int enemyCount;
 
@@ -24,11 +26,18 @@ namespace ConsoleProject2
 
         private GameManager()
         {
+           
             enemyLimitCount = 80;
             enemySetOneStage = 5;
             enemyCount = 0;
             InitObj();
             TimeManager.RoundEvent += SetEnemyStagePerSecond;
+         
+        }
+
+        public void SetPlayer(Player player)
+        {
+            this.player = player;
         }
 
         public void SetEnemyStagePerSecond()
@@ -65,14 +74,21 @@ namespace ConsoleProject2
             {
                 Map.pixelNum[activeTowers[i].PosY, activeTowers[i].PosX] = activeTowers[i].Grade;
                 Map.pixel[activeTowers[i].PosY, activeTowers[i].PosX] = activeTowers[i].Type;
-               
-              
+
             }
         }
+
+        public void ChechkPlayer()
+        {
+            Map.pixelNum[player.PosY, player.PosX] = PixelType.PLAYER;
+        }
+        
+        
         public void CheckDraw()
         {
             CheckEnemy();
             CheckTower();
+            ChechkPlayer();
         }
 
         public void AttackCollider(Tower tower)
@@ -250,13 +266,69 @@ namespace ConsoleProject2
             if (gmSingleton == null)
             {
                 gmSingleton = new GameManager();
-
-
+                
 
             }
 
             return gmSingleton;
 
+        }
+
+        public void InputKey()
+        {
+            //매끄러운 키 입력 구현
+            if (Console.KeyAvailable)
+            {
+                ConsoleKeyInfo consoleKey = Console.ReadKey(true);
+
+                switch (consoleKey.Key)
+                {
+                    case ConsoleKey.RightArrow:
+                        MoveCursor(1,0);
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        MoveCursor(-1,0);
+
+                        break;
+
+                    case ConsoleKey.UpArrow:
+                        MoveCursor(0,-1);
+
+                        break;
+                    case ConsoleKey.DownArrow:
+                        MoveCursor(0,1);
+
+                        break;
+                }
+            }
+        }
+
+        public void MoveCursor(int posX, int posY)
+        {
+            if (player.PosX + posX < Map.centerPos || player.PosX + posX > Map.widthCenter)
+                return;
+            if (player.PosY + posY < Map.centerPos || player.PosY + posY > Map.heightCenter)
+                return;
+
+            player.PosX += posX;
+            player.PosY += posY;
+
+
+        }
+
+        public void GachaTower()
+        {
+        
+        }
+
+        public void SellTower()
+        {
+           
+        }
+
+        public void MergeTower()
+        {
+    
         }
     }
 }
