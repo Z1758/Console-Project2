@@ -70,19 +70,27 @@ namespace ConsoleProject2
             }
             Enemy enemy = disabledEnemyQueue.Dequeue();
             enemy.EnemyInitStatus(curEnemyInfo.hp, curEnemyInfo.moveSpeed, curEnemyInfo.dropGold);
-           
+
+            enemy.DisableEvent += DisableEnemy;
             TimeManager.AddEnemyMoveEvent(enemy);
+
             activeEnemies.Add(enemy);
             enemyCount++;
+
 
             //임시 나중에 수정
             curEnemyInfo = StageManager.EnemyInformations[enemyCount];
         }
-
-        public void CurrentEnemyInfoSet()
+        public void DisableEnemy(Enemy enemy)
         {
-            //임시 나중에 수정
-            curEnemyInfo = StageManager.EnemyInformations[1];
+            enemy.DisableEvent -= DisableEnemy;
+            TimeManager.RemoveEnemyMoveEvent(enemy);
+
+            activeEnemies.Remove(enemy);
+           
+            disabledEnemyQueue.Enqueue(enemy);
+            
+            enemyCount--;
         }
 
         public void InitEnemy()
@@ -93,7 +101,12 @@ namespace ConsoleProject2
             }
         }
 
-    
+      
+              public void CurrentEnemyInfoSet()
+        {
+            //임시 나중에 수정
+            curEnemyInfo = StageManager.EnemyInformations[1];
+        }
 
 
         private static GameManager gmSingleton;

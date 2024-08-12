@@ -46,8 +46,12 @@ namespace ConsoleProject2
             tickTimer.Elapsed += new System.Timers.ElapsedEventHandler(enemy.MoveEnemy);
         }
 
+        static public void RemoveEnemyMoveEvent(Enemy enemy)
+        {
 
-       
+            tickTimer.Elapsed -= new System.Timers.ElapsedEventHandler(enemy.MoveEnemy);
+        }
+
 
 
     }

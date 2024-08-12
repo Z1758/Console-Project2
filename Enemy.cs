@@ -23,6 +23,8 @@ namespace ConsoleProject2
 
         public int curTick;
 
+        public event Action<Enemy> DisableEvent;
+
         public Enemy()
         {
             posX = 1; posY = 1;
@@ -42,7 +44,7 @@ namespace ConsoleProject2
             curTick = 0;
 
             this.maxHp = maxHp;
-            this.curHp = maxHp;
+            curHp = maxHp;
             this.moveSpeed = moveSpeed;
             this.dropGold = dropGold;
 
@@ -52,6 +54,12 @@ namespace ConsoleProject2
         {
 
             curTick++;
+
+            //테스트용 임시
+          
+            TakeDamage();
+            
+
             if (curTick < moveSpeed)
             {
                 return;
@@ -74,10 +82,29 @@ namespace ConsoleProject2
 
 
             }
+      
+        }
 
+        public void TakeDamage()
+        {
+            if (curHp <= 0)
+            {
+                return;
+            }
+            curHp -= 5;
+   
+            if (curHp <= 0)
+            {
+                Die();
+            }
+        }
 
+        private void Die()
+        {
+            DisableEvent(this);
            
         }
+
         public void GoDown()
         {
             posY++;

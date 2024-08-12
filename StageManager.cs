@@ -31,11 +31,11 @@ namespace ConsoleProject2
 
         static public void SetEnemyInformation()
         {
-            EnemyInformations.Add(1, new EnemyInfo { hp = 10,  moveSpeed = 10, dropGold = 10 });
-            EnemyInformations.Add(2, new EnemyInfo { hp = 15, moveSpeed = 9, dropGold = 10 });
-            EnemyInformations.Add(3, new EnemyInfo { hp = 10, moveSpeed = 3, dropGold = 10 });
-            EnemyInformations.Add(4, new EnemyInfo { hp = 50, moveSpeed = 20, dropGold = 10 });
-            EnemyInformations.Add(5, new EnemyInfo { hp = 40, moveSpeed = 10, dropGold = 10 });
+            EnemyInformations.Add(1, new EnemyInfo { hp = 100,  moveSpeed = 10, dropGold = 10 });
+            EnemyInformations.Add(2, new EnemyInfo { hp = 150, moveSpeed = 9, dropGold = 10 });
+            EnemyInformations.Add(3, new EnemyInfo { hp = 100, moveSpeed = 3, dropGold = 10 });
+            EnemyInformations.Add(4, new EnemyInfo { hp = 500, moveSpeed = 20, dropGold = 10 });
+            EnemyInformations.Add(5, new EnemyInfo { hp = 400, moveSpeed = 10, dropGold = 10 });
           
         }
 
