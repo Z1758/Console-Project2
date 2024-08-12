@@ -6,7 +6,6 @@
 
         Player player;
 
-        public string output = "";
 
         public EnemyInfo curEnemyInfo;
 
@@ -173,9 +172,7 @@
                                     activeEnemies[e].TakeDamage(tower.Attack);
                                     tower.AtkTick = 0;
 
-                                    output = tower.Attack + " 데미지로 공격";
-
-
+                                  
 
                                     return;
                                 }
@@ -398,7 +395,7 @@
                 if (activeTowers[i].PosX == player.PosX && activeTowers[i].PosY == player.PosY)
                 {
                     activeTowers[i].Disable();
-                    StageManager.SetGold(40);
+                    StageManager.SetGold(30);
                     break;
                 }
 

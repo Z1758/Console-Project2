@@ -196,7 +196,8 @@ namespace ConsoleProject2
             Console.ForegroundColor = ConsoleColor.White;
 
             Console.WriteLine();
-            Console.WriteLine($"           라운드 시간 {TimeManager.roundCount:00}");
+            Console.WriteLine($"           남은 시간 {TimeManager.roundCount:00}");
+            Console.WriteLine();
             Console.ResetColor();
 
             for (int i = 0; i < height; i++)
@@ -207,14 +208,55 @@ namespace ConsoleProject2
                   
                     if (j >= width)
                     {
-                        if (i == 5)
+                        if(i == 0)
                         {
                             Console.ForegroundColor = ConsoleColor.White;
-                            Console.Write($"  골드");
-                            Console.Write($"    {StageManager.GetGold():00000}");
-                            
-                           
+                            Console.Write($"    스테이지");
+                            Console.Write($" {StageManager.currentStage}");
                         }
+                        if (i == 1)
+                        {
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.Write($"   적 수");
+                            Console.Write($" {StageManager.enemyCount:00}/{StageManager.enemyLimitCount}");
+
+
+                        }
+                        if (i == 2)
+                        {
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.Write($"   골드");
+                            Console.Write($"  {StageManager.GetGold():0000}");
+
+                        }
+
+                        if (i == 5)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.Write($"   S   ");
+                            Console.Write($"♨ ㉿ ☎");
+                        }
+                        if (i == 6)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write($"   A   ");
+                            Console.Write($"♣ ♬ ●");
+                        }
+                        if (i == 7)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write($"   B   ");
+                            Console.Write($"♥ ★ ◈");
+                        }
+                        if (i == 8)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.Write($"   C   ");
+                            Console.Write($"♡ ☆ ◇");
+                        }
+
+
+
 
                         continue;
                     }
@@ -297,8 +339,8 @@ namespace ConsoleProject2
                 Console.ResetColor();
                 Console.WriteLine();
             }
-
-
+            Console.ResetColor();
+            Console.WriteLine("\n       Q 뽑기 E 병합 T 판매");
         }
 
     }

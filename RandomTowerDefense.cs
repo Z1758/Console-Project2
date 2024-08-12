@@ -32,7 +32,7 @@ namespace ConsoleProject2
             Map.DrawPixel();
 
             gameManager.InputKey();
-            Console.WriteLine(gameManager.output);
+           
            // ClearBuffer();
         }
         static void Main(string[] args)
