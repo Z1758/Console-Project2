@@ -48,7 +48,9 @@ namespace ConsoleProject2
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 output = gameover;
             }
-
+            Console.WriteLine();
+            Console.WriteLine(); 
+            Console.WriteLine();
 
             int cnt = 0;
             while (cnt < output[3].Length)

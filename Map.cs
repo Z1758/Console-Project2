@@ -49,10 +49,9 @@ namespace ConsoleProject2
         public static int[,] pixelNum = new int[height, width];
 
 
-
         static public void PixelInit()
         {
-
+            
             for (int i = 0; i < height; i++)
             {
 
@@ -269,7 +268,8 @@ namespace ConsoleProject2
                     {
                         case PixelType.WALL:
                             //벽
-                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.BackgroundColor = ConsoleColor.DarkGray;
                             break;
                         case PixelType.USERSPACE:
                             //플레이어 공간
@@ -310,7 +310,7 @@ namespace ConsoleProject2
                     if (pixelNum[i, j] == PixelType.BOSS)
                     {
                         //보스
-                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.ForegroundColor = CheckHp(i, j);
                         pixel[i, j] = 'B';
                         Console.Write(pixel[i, j]);
                         Console.Write(1);
@@ -320,7 +320,7 @@ namespace ConsoleProject2
                     else if (10 + PixelType.ENEMY + 1 > pixelNum[i, j] && pixelNum[i, j] >= PixelType.ENEMIES)
                     {
                         //겹쳐있는 적
-                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.ForegroundColor = CheckHp(i, j);
                         pixel[i, j] = 'E';
                         Console.Write(pixel[i, j]);
 
@@ -332,12 +332,13 @@ namespace ConsoleProject2
                     }
                     else if(pixelNum[i, j] == PixelType.ENEMY){
                         //적
-                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.ForegroundColor = CheckHp(i, j);
                         pixel[i, j] = 'E';
                         Console.Write(pixel[i, j]);
                         Console.Write(1);
-                        
 
+
+                        
                     }
                    
 
@@ -366,6 +367,33 @@ namespace ConsoleProject2
 
             Console.WriteLine("   Q 뽑기 E 병합 T 판매");
         }
+        static public ConsoleColor CheckHp(int y, int x)
+        {
+            Console.ResetColor();
+            for (int i = 0; i < RandomTowerDefense.gameManager.activeEnemies.Count; i++)
+            {
+                if (RandomTowerDefense.gameManager.activeEnemies[i].PosX == x && RandomTowerDefense.gameManager.activeEnemies[i].PosY == y)
+                {
+                    if (RandomTowerDefense.gameManager.activeEnemies[i].CurHp < RandomTowerDefense.gameManager.activeEnemies[i].MaxHp * 0.3)
+                    {
+                        return ConsoleColor.Red;
+                    }
+                    else if (RandomTowerDefense.gameManager.activeEnemies[i].CurHp < RandomTowerDefense.gameManager.activeEnemies[i].MaxHp * 0.7)
+                    {
+                        return ConsoleColor.Yellow;
+                    }
+                    else
+                    {
 
+                        return ConsoleColor.Green;
+                    }
+                }
+               
+            }
+           
+            return ConsoleColor.Gray;
+        }
     }
+
+   
 }

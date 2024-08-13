@@ -7,7 +7,7 @@ namespace ConsoleProject2
     public class RandomTowerDefense
     {
 
-        static GameManager gameManager;
+        public static GameManager gameManager;
         static public void Init()
         {
 

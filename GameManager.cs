@@ -11,7 +11,7 @@
 
         Queue<Enemy> disabledEnemyQueue = new Queue<Enemy>();
 
-        List<Enemy> activeEnemies = new List<Enemy>();
+        public List<Enemy> activeEnemies = new List<Enemy>();
 
         Queue<Tower> disabledTowerQueue = new Queue<Tower>();
 

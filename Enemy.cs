@@ -29,14 +29,15 @@ namespace ConsoleProject2
         public int PosY { get => posY;  }
         public int DropGold { get => dropGold;  }
         public bool BossFlag { get => bossFlag; set => bossFlag = value; }
+        public int MaxHp { get => maxHp; set => maxHp = value; }
 
         public event Action<Enemy> DisableEvent;
 
         public Enemy()
         {
             posX = 1; posY = 1;
-            maxHp = 0;
-            curHp = maxHp;
+            MaxHp = 0;
+            curHp = MaxHp;
             moveSpeed = 0;
             dropGold = 0;
             bossFlag = false;
@@ -50,7 +51,7 @@ namespace ConsoleProject2
 
             moveTick = 0;
 
-            this.maxHp = maxHp;
+            this.MaxHp = maxHp;
             curHp = maxHp;
             this.moveSpeed = moveSpeed;
             this.dropGold = dropGold;
