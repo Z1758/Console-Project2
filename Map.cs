@@ -507,7 +507,7 @@ namespace ConsoleProject2
 
 
                     }
-                    else if (pixelNum[i, j] >= PixelType.OVERLAPPLAYER)
+                    else if (PixelType.GRADE_C > pixelNum[i, j] && pixelNum[i, j] >= PixelType.OVERLAPPLAYER)
                     {
                         //적과 플레이어 오버랩
                         Console.ForegroundColor = ConsoleColor.Black;

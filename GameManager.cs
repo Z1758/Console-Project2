@@ -109,9 +109,11 @@
 
         public void ChechkPlayer()
         {
-            if (Map.pixelNum[player.PosY, player.PosX] >= PixelType.ENEMY && Map.pixelNum[player.PosY, player.PosX] < PixelType.RANDOMUSERSPACE)
+            int playerNum = Map.pixelNum[player.PosY, player.PosX];
+
+            if ( playerNum  >= PixelType.ENEMY && playerNum < PixelType.RANDOMUSERSPACE)
             {
-                Map.pixelNum[player.PosY, player.PosX] = PixelType.OVERLAPPLAYER+ Map.pixelNum[player.PosY, player.PosX];
+                Map.pixelNum[player.PosY, player.PosX] = PixelType.OVERLAPPLAYER+ playerNum;
             }
             else
             {
