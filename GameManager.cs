@@ -41,9 +41,14 @@
 
         public void CheckEnemy()
         {
+            int bossIndex = 0;
             for (int i = 0; i < activeEnemies.Count; i++)
             {
-                if (Map.pixelNum[activeEnemies[i].PosY, activeEnemies[i].PosX] >= PixelType.ENEMIES)
+                if (activeEnemies[i].BossFlag)
+                {
+                    bossIndex = i;
+                }
+                else if (Map.pixelNum[activeEnemies[i].PosY, activeEnemies[i].PosX] >= PixelType.ENEMIES)
                 {
                     Map.pixelNum[activeEnemies[i].PosY, activeEnemies[i].PosX]++;
                 }
@@ -52,12 +57,18 @@
 
                     Map.pixelNum[activeEnemies[i].PosY, activeEnemies[i].PosX] = PixelType.ENEMIES;
                 }
+             
                 else
                 {
                     Map.pixelNum[activeEnemies[i].PosY, activeEnemies[i].PosX] = PixelType.ENEMY;
                 }
 
             }
+            if (CheckBossStage())
+            {
+                Map.pixelNum[activeEnemies[bossIndex].PosY, activeEnemies[bossIndex].PosX] = PixelType.BOSS;
+            }
+          
         }
         public void CheckTower()
         {
@@ -259,6 +270,11 @@
             Enemy enemy = disabledEnemyQueue.Dequeue();
             enemy.EnemyInitStatus(curEnemyInfo.hp, curEnemyInfo.moveSpeed, curEnemyInfo.dropGold);
 
+            if(CheckBossStage())
+            {
+                enemy.BossFlag = true;
+            }
+
             enemy.DisableEvent += DisableEnemy;
             TimeManager.AddEnemyMoveEvent(enemy);
 
@@ -303,6 +319,15 @@
             curEnemyInfo = StageManager.EnemyInformations[StageManager.currentStage];
         }
 
+        public bool CheckBossStage()
+        {
+            if (StageManager.currentStage == 10)
+            {
+                return true;
+            }
+
+            return false;
+        }
 
         private static GameManager gmSingleton;
         public static GameManager Instance()

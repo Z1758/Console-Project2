@@ -26,6 +26,8 @@ namespace ConsoleProject2
         static public int enemySetOneStage;
         static public int enemyCount;
 
+        static bool bossStage;
+
         public static Dictionary<int,EnemyInfo> EnemyInformations;
         
         static public void SetGold(int gold)
@@ -47,8 +49,9 @@ namespace ConsoleProject2
             enemyLimitCount = 80;
             enemySetOneStage = 50;
             userGold = 1000;
-            currentStage = 1;
+            currentStage = 9;
             enemyCount = 0;
+            bossStage = false;
         }
 
 
@@ -65,6 +68,7 @@ namespace ConsoleProject2
             EnemyInformations.Add(8, new EnemyInfo { hp = 500, moveSpeed = 3, dropGold = 10 });
             EnemyInformations.Add(9, new EnemyInfo { hp = 900, moveSpeed = 20, dropGold = 10 });
             EnemyInformations.Add(10, new EnemyInfo{ hp = 12000, moveSpeed = 7, dropGold = 100 });
+            EnemyInformations.Add(11, new EnemyInfo { hp = 12000, moveSpeed = 7, dropGold = 100 });
         }
 
       

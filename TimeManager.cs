@@ -50,10 +50,24 @@ namespace ConsoleProject2
                 StageManager.currentStage++;
                 NextStage();
 
+                if (StageManager.currentStage == 10)
+                {
+                    RoundEvent();
+                } else if (StageManager.currentStage > 10)
+                {
+                    //게임오버 구현
+                }
+
             }
 
-            if(roundTime - StageManager.enemySetOneStage <= roundCount)
+            if (roundTime - StageManager.enemySetOneStage <= roundCount && StageManager.currentStage < 10)
+            {
+                if (StageManager.enemyCount >= StageManager.enemyLimitCount)
+                {
+                    //게임오버 구현
+                }
                 RoundEvent();
+            }
 
         }
 

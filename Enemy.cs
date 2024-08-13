@@ -18,7 +18,7 @@ namespace ConsoleProject2
         private int curHp;
         private double moveSpeed;
         private int dropGold;
-  
+        private bool bossFlag;
         private EnemyMoveState moveState = EnemyMoveState.Down;
 
         public int moveTick;
@@ -28,6 +28,7 @@ namespace ConsoleProject2
         public int PosX { get => posX;  }
         public int PosY { get => posY;  }
         public int DropGold { get => dropGold;  }
+        public bool BossFlag { get => bossFlag; set => bossFlag = value; }
 
         public event Action<Enemy> DisableEvent;
 
@@ -38,7 +39,7 @@ namespace ConsoleProject2
             curHp = maxHp;
             moveSpeed = 0;
             dropGold = 0;
-
+            bossFlag = false;
             moveTick = 0;
         }
 
@@ -61,10 +62,6 @@ namespace ConsoleProject2
 
             moveTick++;
 
-            //테스트용 임시
-          
-           // TakeDamage();
-            
 
             if (moveTick < moveSpeed)
             {

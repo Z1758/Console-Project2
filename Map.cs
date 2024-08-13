@@ -301,9 +301,18 @@ namespace ConsoleProject2
                             break;
                     }
 
-                  
 
-                    if (10 + PixelType.ENEMY + 1 > pixelNum[i, j] && pixelNum[i, j] >= PixelType.ENEMIES)
+                    if (pixelNum[i, j] == PixelType.BOSS)
+                    {
+                        //보스
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        pixel[i, j] = 'B';
+                        Console.Write(pixel[i, j]);
+                        Console.Write(1);
+
+
+                    }
+                    else if (10 + PixelType.ENEMY + 1 > pixelNum[i, j] && pixelNum[i, j] >= PixelType.ENEMIES)
                     {
                         //겹쳐있는 적
                         Console.ForegroundColor = ConsoleColor.Green;
@@ -325,13 +334,16 @@ namespace ConsoleProject2
                         
 
                     }
-                  
+                   
+
                     else
                     {
                         Console.Write(pixel[i, j]);
                     }
 
-                   
+                  
+
+
                     Console.ResetColor();
 
 
