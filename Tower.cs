@@ -54,7 +54,7 @@ namespace ConsoleProject2
             {
                 case PixelType.GRADE_C_POWER:
                     {
-                        attack = 300;
+                        attack = 30;
                         atkSpeed = 10;
                         range = 3;
                         type = '♡';
@@ -63,7 +63,7 @@ namespace ConsoleProject2
                     break;
                 case PixelType.GRADE_C_SPEED:
                     {
-                        attack = 200;
+                        attack = 20;
                         atkSpeed = 8;
                         range = 3;
                         type = '☆';
@@ -72,7 +72,7 @@ namespace ConsoleProject2
                     break;
                 case PixelType.GRADE_C_RANGE:
                     {
-                        attack = 200;
+                        attack = 20;
                         atkSpeed = 10;
                         range = 4;
                         type = '◇';

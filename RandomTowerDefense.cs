@@ -33,7 +33,7 @@ namespace ConsoleProject2
 
             gameManager.InputKey();
 
-            // ClearBuffer();
+           
         }
 
         static public bool EndGameCheck()
@@ -72,15 +72,6 @@ namespace ConsoleProject2
             }
             EndGame();
 
-        }
-
-        //키 입력 버퍼 지우기
-        static void ClearBuffer()
-        {
-            while (Console.KeyAvailable)
-            {
-                Console.ReadKey(false);
-            }
         }
 
     }

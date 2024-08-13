@@ -33,11 +33,6 @@
             this.player = player;
         }
 
-        public void SetEnemyStagePerSecond()
-        {
-            SetEnemy();
-
-        }
 
         public void CheckEnemy()
         {
@@ -319,6 +314,11 @@
             }
         }
 
+        public void SetEnemyStagePerSecond()
+        {
+            SetEnemy();
+
+        }
 
         public void CurrentEnemyInfoSet()
         {
@@ -412,15 +412,15 @@
                     Random random = new Random();
                     double ran = random.Next(1, 100);
 
-                    if(0 <= ran && ran <= 3.5)
+                    if(0 <= ran && ran <= 2.5)
                     {
                         SetTower(PixelType.GRADE_B);
                     }
-                    else if (3.5 <= ran && ran < 18.6)
+                    else if (2.5 <= ran && ran < 11.6)
                     {
                         SetTower(PixelType.GRADE_C);
                     }
-                    else if (18.6 <= ran && ran < 100)
+                    else if (11.6 <= ran && ran < 100)
                     {
                         SetTower(PixelType.GRADE_C_START);
                     }

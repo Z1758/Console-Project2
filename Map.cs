@@ -15,8 +15,8 @@ namespace ConsoleProject2
        
         
 
-        public static int width = 12;
-        public static int height = 12;
+        public static int width = 16;
+        public static int height = 16;
 
         const char center = '■';
         const char border = '▣';
@@ -196,7 +196,12 @@ namespace ConsoleProject2
             Console.ForegroundColor = ConsoleColor.White;
 
             Console.WriteLine();
-            Console.WriteLine($"           남은 시간 {TimeManager.roundCount:00}");
+            for (int i = 0; i < width / 2; i++)
+            {
+                Console.Write(" ");
+            }
+
+            Console.WriteLine($"       남은 시간 {TimeManager.roundCount:00}");
             Console.WriteLine();
             Console.ResetColor();
 
@@ -352,7 +357,14 @@ namespace ConsoleProject2
                 Console.WriteLine();
             }
             Console.ResetColor();
-            Console.WriteLine("\n       Q 뽑기 E 병합 T 판매");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine();
+            for (int i = 0; i < width/2; i++)
+            {
+                Console.Write(" ");
+            }
+
+            Console.WriteLine("   Q 뽑기 E 병합 T 판매");
         }
 
     }
