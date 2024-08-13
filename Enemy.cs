@@ -13,6 +13,7 @@ namespace ConsoleProject2
 
     public class Enemy : IDynamicObject
     {
+        private int posX;
         private int posY;
         private int maxHp;
         private int curHp;
@@ -22,7 +23,8 @@ namespace ConsoleProject2
         private EnemyMoveState moveState = EnemyMoveState.Down;
 
         public int moveTick;
-        private int posX;
+
+        List<Point> randomPath;
 
         public int CurHp { get => curHp;  }
         public int PosX { get => posX;  }

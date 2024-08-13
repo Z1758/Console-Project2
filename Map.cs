@@ -15,11 +15,12 @@ namespace ConsoleProject2
        
         
 
-        public static int width = 16;
-        public static int height = 16;
+        public static int width = 15;
+        public static int height = 15;
 
-        const char center = '■';
+        const char userSpace = '■';
         const char border = '▣';
+        const char randomEnemyPath = '▦';
 
 
         // 외부 
@@ -49,9 +50,10 @@ namespace ConsoleProject2
         public static int[,] pixelNum = new int[height, width];
 
 
-        static public void PixelInit()
+        static public void PixelMode1Init()
         {
-            
+
+
             for (int i = 0; i < height; i++)
             {
 
@@ -75,11 +77,11 @@ namespace ConsoleProject2
 
                     else if ((i >= centerPos && i <= heightCenter) && (j >= centerPos && j <= widthCenter))
                     {
-                        pixel[i, j] = center;
-                        pixelNum[i, j] = PixelType.USERSPACE; 
+                        pixel[i, j] = userSpace;
+                        pixelNum[i, j] = PixelType.USERSPACE;
                     }
                     //적 이동 경로 나눠 놓은것
-                    else if (i == enemyPathPos && (enemyPathPos + 1<= j && j <= widthEnemyPath))
+                    else if (i == enemyPathPos && (enemyPathPos + 1 <= j && j <= widthEnemyPath))
                     {
                         pixel[i, j] = '←';
                         pixelNum[i, j] = PixelType.ENEMYPATH;
@@ -100,7 +102,7 @@ namespace ConsoleProject2
 
 
                     }
-                    else if (j == enemyPathPos && (enemyPathPos  <= i && i <= heightEnemyPath - 1))
+                    else if (j == enemyPathPos && (enemyPathPos <= i && i <= heightEnemyPath - 1))
                     {
                         pixel[i, j] = '↓';
                         pixelNum[i, j] = PixelType.ENEMYPATH;
@@ -129,6 +131,76 @@ namespace ConsoleProject2
 
             }
 
+
+        }
+
+        static public void PixelMode2Init()
+        {
+            Random ran = new Random();
+
+      
+
+            for (int i = 0; i < height; i++)
+            {
+
+                for (int j = 0; j < width; j++)
+                {
+                    if (i == 0 || i == height - 1 || j == 0 || j == width - 1)
+                    {
+                        pixel[i, j] = border;
+                        pixelNum[i, j] = PixelType.WALL;
+
+                    }
+                    else if (i % 2 == 0 || j % 2 == 0)
+                    {
+                        pixel[i, j] = userSpace;
+                        pixelNum[i, j] = PixelType.RANDOMUSERSPACE;
+                    }
+                    else
+                    {
+                        pixel[i, j] = randomEnemyPath;
+                        pixelNum[i, j] = PixelType.RANDOMENEMYPATH;
+
+                    }
+                }
+            }
+
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    if (i % 2 == 0 || j % 2 == 0)
+                        continue;
+                    if (j == width - 2 && i == height - 2)
+                        continue;
+
+                    if (i == height - 2)
+                    {
+                        pixel[i, j + 1] = randomEnemyPath;
+                        pixelNum[i, j + 1] = PixelType.RANDOMENEMYPATH;
+                        continue;
+                    }
+
+                    if (j == width - 2)
+                    {
+                        pixel[i +1, j] = randomEnemyPath;
+                        pixelNum[i + 1, j] = PixelType.RANDOMENEMYPATH;
+                        continue;
+                    }
+
+
+                    if (ran.Next(0, 2) == 0)
+                    {
+                        pixel[i, j + 1] = randomEnemyPath;
+                        pixelNum[i, j + 1] = PixelType.RANDOMENEMYPATH;
+                    }
+                    else
+                    {
+                        pixel[i +1, j] = randomEnemyPath;
+                        pixelNum[i + 1, j] = PixelType.RANDOMENEMYPATH;
+                    }
+                }
+            }
 
         }
 
@@ -172,7 +244,7 @@ namespace ConsoleProject2
             {
                 for (int j = centerPos ; j <= widthCenter; j++)
                 {
-                    pixel[i, j] = center;
+                    pixel[i, j] = userSpace;
 
 
                     pixelNum[i, j] = PixelType.USERSPACE;
@@ -278,6 +350,14 @@ namespace ConsoleProject2
                         case PixelType.ENEMYPATH:
                             //적 이동 경로
                             Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            break;
+                        case PixelType.RANDOMUSERSPACE:
+                            //플레이어 공간
+                            Console.ForegroundColor = ConsoleColor.White;
+                            break;
+                        case PixelType.RANDOMENEMYPATH:
+                            //적 이동 경로
+                            Console.ForegroundColor = ConsoleColor.Black;
                             break;
                         case PixelType.GRADE_C:
                             //타워 등급

@@ -18,6 +18,9 @@ namespace ConsoleProject2
         public const int ENEMIES = 5;
         public const int BOSS = 100;
 
+        public const int RANDOMUSERSPACE = 501;
+        public const int RANDOMENEMYPATH = 502;
+
         public const int GRADE_C_START = 1001;
         public const int GRADE_C_POWER = 1001;
         public const int GRADE_C_SPEED = 1002;

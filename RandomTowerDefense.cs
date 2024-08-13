@@ -8,10 +8,14 @@ namespace ConsoleProject2
     {
 
         public static GameManager gameManager;
+
+        public static int mode;
+
         static public void Init()
         {
 
-            Map.PixelInit();
+            
+
             StageManager.StageManagerInit();
 
             Player player = Player.Instance();
@@ -57,26 +61,57 @@ namespace ConsoleProject2
         {
 
             GameStart.StartScene();
+            SelectMode();
+            switch (mode)
+            {
+                case 0:
+                    Map.PixelMode1Init();
+                    break;
+                case 1:
+                    Map.PixelMode2Init();
+                    break;
+
+            }
+
+            Map.DrawPixel();
+
+            /*
             Init();
 
 
-
-            
-
-            
 
             while (EndGameCheck())
             {
                 Update();
                 
             }
-            EndGame();
+            EndGame();*/
 
+        }
+
+        static public void SelectMode()
+        {
+            ClearBuffer();
+            int select = 0;
+            Console.WriteLine("모드 선택 0,1  기본 0");
+            int.TryParse(Console.ReadLine() , out select);
+
+            mode = select;
+          
+        }
+
+        //키 입력 버퍼 지우기
+        static void ClearBuffer()
+        {
+            while (Console.KeyAvailable)
+            {
+                Console.ReadKey(false);
+            }
         }
 
     }
 
 
 
-   
+
 }
