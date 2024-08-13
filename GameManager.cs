@@ -206,14 +206,8 @@
             Tower tower = disabledTowerQueue.Dequeue();
             tower.AttackEvent += AttackCollider;
 
-            //임시 나중에 랜덤 구현
-            if (grade == 5)
-            {
-                tower.RandomInit(random.Next(PixelType.GRADE_C_START, PixelType.GRADE_C_END));
-            }
-            else
-            {
-
+           
+            
                 switch (grade)
                 {
                     case PixelType.GRADE_C:
@@ -225,10 +219,13 @@
                     case PixelType.GRADE_A:
                         tower.RandomInit(random.Next(PixelType.GRADE_S_START, PixelType.GRADE_S_END));
                         break;
+                    default:
+                        tower.RandomInit(random.Next(PixelType.GRADE_C_START, PixelType.GRADE_C_END));
+                        break;
 
                 }
 
-            }
+            
 
 
 
@@ -381,8 +378,23 @@
             {
                 if (CheckTowerCursor() == false)
                 {
-                    //임시 나중에 랜덤 구현
-                    SetTower(5);
+                    Random random = new Random();
+                    double ran = random.Next(1, 100);
+
+                    if(0 <= ran && ran <= 3.5)
+                    {
+                        SetTower(PixelType.GRADE_B);
+                    }
+                    else if (3.5 <= ran && ran < 18.6)
+                    {
+                        SetTower(PixelType.GRADE_C);
+                    }
+                    else if (18.6 <= ran && ran < 100)
+                    {
+                        SetTower(PixelType.GRADE_C_START);
+                    }
+
+
                     StageManager.SetGold(-50);
                 }
             }
