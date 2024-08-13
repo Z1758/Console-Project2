@@ -109,7 +109,16 @@
 
         public void ChechkPlayer()
         {
-            Map.pixelNum[player.PosY, player.PosX] = PixelType.PLAYER;
+            if (Map.pixelNum[player.PosY, player.PosX] >= PixelType.ENEMY && Map.pixelNum[player.PosY, player.PosX] < PixelType.RANDOMUSERSPACE)
+            {
+                Map.pixelNum[player.PosY, player.PosX] = PixelType.OVERLAPPLAYER+ Map.pixelNum[player.PosY, player.PosX];
+            }
+            else
+            {
+                Map.pixelNum[player.PosY, player.PosX] = PixelType.PLAYER;
+            }
+
+            
         }
 
 
@@ -417,14 +426,27 @@
 
         public void MoveCursor(int posX, int posY)
         {
-            if (player.PosX + posX < Map.centerPos || player.PosX + posX > Map.widthCenter)
-                return;
-            if (player.PosY + posY < Map.centerPos || player.PosY + posY > Map.heightCenter)
-                return;
+            if (RandomTowerDefense.mode == 0)
+            {
 
-            player.PosX += posX;
-            player.PosY += posY;
+                if (player.PosX + posX < Map.centerPos || player.PosX + posX > Map.widthCenter)
+                    return;
+                if (player.PosY + posY < Map.centerPos || player.PosY + posY > Map.heightCenter)
+                    return;
 
+                player.PosX += posX;
+                player.PosY += posY;
+            }
+            else if (RandomTowerDefense.mode == 1)
+            {
+                if (player.PosX + posX < Map.borderPos+1 || player.PosX + posX > Map.widthBorder-1)
+                    return;
+                if (player.PosY + posY < Map.borderPos+1 || player.PosY + posY > Map.heightBorder-1)
+                    return;
+
+                player.PosX += posX;
+                player.PosY += posY;
+            }
 
         }
 

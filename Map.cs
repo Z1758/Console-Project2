@@ -20,13 +20,13 @@ namespace ConsoleProject2
 
         const char userSpace = '■';
         const char border = '▣';
-        const char randomEnemyPath = '▦';
+        const char randomEnemyPath = '■';
 
         public static int userSpaceCnt = 0;
         // 외부 
-        static int borderPos = 0;
-        static int widthBorder = width - 1;
-        static int heightBorder = height - 1;
+       public static int borderPos = 0;
+       public static int widthBorder = width - 1;
+       public static int heightBorder = height - 1;
 
         // 적 이동 경로
        public static int enemyPathPos = 1;
@@ -209,21 +209,41 @@ namespace ConsoleProject2
                   
                 }
             }
+            A_Star.PathFinding(pixelNum, new Point(1, 1), new Point(Map.height - 2, Map.width - 2), out randomPath);
 
             for (int i = 0; i < height; i++)
             {
 
                 for (int j = 0; j < width; j++)
                 {
-                    if (pixelNum[i, j] == PixelType.RANDOMUSERSPACE)
+                    if (i == 0 || i == height - 1 || j == 0 || j == width - 1)
                     {
-                        userSpaceCnt++;
+                        continue;
 
                     }
+
+                    foreach (Point point in randomPath)
+                    {
+                        if(point.x == j && point.y == i)
+                        {
+
+                        }
+                        else
+                        {
+
+                            pixel[i, j] = userSpace;
+                            pixelNum[i, j] = PixelType.RANDOMUSERSPACE;
+                            userSpaceCnt++;
+                        }
+                    }
+
+                   
                     
                 }
             }
-            A_Star.PathFinding(pixelNum, new Point(1, 1), new Point(Map.height - 2, Map.width - 2), out randomPath);
+
+
+
         }
 
 
@@ -288,12 +308,20 @@ namespace ConsoleProject2
             {
                 for (int j = borderPos+1; j <= widthBorder-1; j++)
                 {
-                    if (pixelNum[i,j] > PixelType.USERSPACE)
+
+                    if (pixelNum[i, j] == PixelType.OVERLAPPLAYER)
+                    {
+                        continue;
+                    }
+
+                    if (pixelNum[i,j] > PixelType.USERSPACE && pixelNum[i, j] != PixelType.PLAYER)
                     {
                         continue;
                     }
                     else
                     {
+                        
+
                         pixel[i, j] = userSpace;
 
 
@@ -356,24 +384,28 @@ namespace ConsoleProject2
 
                         if (i == 5)
                         {
+                           
                             Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.Write($"   S   ");
                             Console.Write($"♨ ㉿ ☎");
                         }
                         if (i == 6)
                         {
+                    
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.Write($"   A   ");
                             Console.Write($"♣ ♬ ●");
                         }
                         if (i == 7)
                         {
+                          
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Write($"   B   ");
                             Console.Write($"♥ ★ ◈");
                         }
                         if (i == 8)
                         {
+                           
                             Console.ForegroundColor = ConsoleColor.Cyan;
                             Console.Write($"   C   ");
                             Console.Write($"♡ ☆ ◇");
@@ -434,6 +466,11 @@ namespace ConsoleProject2
                             break;
                     }
 
+                    if (pixelNum[i, j] >= PixelType.GRADE_C && RandomTowerDefense.mode == 1)
+                    {
+                        Console.BackgroundColor = ConsoleColor.DarkGray;
+                    }
+
 
                     if (pixelNum[i, j] == PixelType.BOSS)
                     {
@@ -460,16 +497,30 @@ namespace ConsoleProject2
                     }
                     else if(pixelNum[i, j] == PixelType.ENEMY){
                         //적
-                      
+                       
                         Console.ForegroundColor = CheckHp(i, j);
+                      
                         pixel[i, j] = 'E';
                         Console.Write(pixel[i, j]);
                         Console.Write(1);
 
 
-                        
+
                     }
-                   
+                    else if (pixelNum[i, j] >= PixelType.OVERLAPPLAYER)
+                    {
+                        //적과 플레이어 오버랩
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.BackgroundColor = ConsoleColor.White;
+
+                        pixel[i, j] = 'E';
+                        Console.Write(pixel[i, j]);
+                        Console.Write(pixelNum[i, j] - PixelType.OVERLAPPLAYER - PixelType.ENEMY + 1);
+
+
+
+                    }
+
 
                     else
                     {
@@ -521,7 +572,7 @@ namespace ConsoleProject2
                
             }
            
-            return ConsoleColor.Gray;
+            return ConsoleColor.DarkYellow;
         }
     }
 

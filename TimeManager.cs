@@ -24,7 +24,7 @@ namespace ConsoleProject2
             roundCount = roundTime;
 
             enemyTickTimer = new System.Timers.Timer();
-            enemyTickTimer.Interval = 100; //0.1초마다
+            enemyTickTimer.Interval = 200; //0.2초마다
 
             towerTickTimer = new System.Timers.Timer();
             towerTickTimer.Interval = 100; //0.1초마다
