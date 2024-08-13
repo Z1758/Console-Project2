@@ -30,7 +30,16 @@ namespace ConsoleProject2
 
         static public void Update()
         {
-            Map.DynamicDraw();
+            if (mode == 0)
+            {
+                Map.DynamicDraw();
+            }
+            else
+            {
+                Map.DynamicRandomDraw();
+            }
+
+           
             gameManager.CheckDraw();
 
             Map.DrawPixel();
@@ -73,9 +82,8 @@ namespace ConsoleProject2
 
             }
 
-            Map.DrawPixel();
-
-            /*
+      
+            
             Init();
 
 
@@ -85,7 +93,7 @@ namespace ConsoleProject2
                 Update();
                 
             }
-            EndGame();*/
+            EndGame();
 
         }
 

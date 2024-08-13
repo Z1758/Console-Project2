@@ -40,26 +40,34 @@
             {
                 return;
             }
+           
+
 
             int bossIndex = 0;
             for (int i = 0; i < activeEnemies.Count; i++)
             {
+
+                
                 if (activeEnemies[i].BossFlag)
                 {
+                   
                     bossIndex = i;
                 }
-                else if (Map.pixelNum[activeEnemies[i].PosY, activeEnemies[i].PosX] >= PixelType.ENEMIES)
+                else if (10 + PixelType.ENEMY + 1 > Map.pixelNum[activeEnemies[i].PosY, activeEnemies[i].PosX]
+                    && Map.pixelNum[activeEnemies[i].PosY, activeEnemies[i].PosX] >= PixelType.ENEMIES)
                 {
+                 
                     Map.pixelNum[activeEnemies[i].PosY, activeEnemies[i].PosX]++;
                 }
                 else if (Map.pixelNum[activeEnemies[i].PosY, activeEnemies[i].PosX] == PixelType.ENEMY)
                 {
-
+                 
                     Map.pixelNum[activeEnemies[i].PosY, activeEnemies[i].PosX] = PixelType.ENEMIES;
                 }
              
                 else
                 {
+                  
                     Map.pixelNum[activeEnemies[i].PosY, activeEnemies[i].PosX] = PixelType.ENEMY;
                 }
 
@@ -169,11 +177,11 @@
                     {
                         for (int j = tower.PosX - tower.Range; j < tower.PosX + tower.Range; j++)
                         {
-                            if (i == Map.enemyPathPos && (Map.enemyPathPos <= j && j <= Map.widthEnemyPath) ||
+                            /*if (i == Map.enemyPathPos && (Map.enemyPathPos <= j && j <= Map.widthEnemyPath) ||
                                      j == Map.widthEnemyPath && (Map.enemyPathPos + 1 <= i && i <= Map.heightEnemyPath) ||
                                      i == Map.heightEnemyPath && (Map.enemyPathPos <= j && j <= Map.widthEnemyPath - 1) ||
                                      j == Map.enemyPathPos && (Map.enemyPathPos + 1 <= i && i <= Map.heightEnemyPath - 1))
-                            {
+                            {*/
                                 if (activeEnemies[e].PosY == i && activeEnemies[e].PosX == j)
                                 {
                                     if (activeEnemies[e].CurHp <= 0)
@@ -189,7 +197,7 @@
                                     return;
                                 }
 
-                            }
+                           // }
                         }
                     }
 
@@ -303,15 +311,32 @@
 
         public void InitObj()
         {
-            for (int i = 0; i < StageManager.enemyLimitCount; i++)
+            if (RandomTowerDefense.mode == 1)
             {
-                disabledEnemyQueue.Enqueue(new Enemy());
-            }
+               
+                for (int i = 0; i < StageManager.enemyLimitCount; i++)
+                {
+                    Enemy enemy = new Enemy();
+                    enemy.RandomPath = Map.randomPath;
+                    disabledEnemyQueue.Enqueue(enemy);
 
-            for (int i = 0; i < (Map.widthCenter - 2) * (Map.heightCenter - 2); i++)
+                }
+            }
+            else
+            {
+
+                for (int i = 0; i < StageManager.enemyLimitCount; i++)
+                {
+                    disabledEnemyQueue.Enqueue(new Enemy());
+
+                }
+            }
+            for (int i = 0; i < StageManager.towerLimitCount; i++)
             {
                 disabledTowerQueue.Enqueue(new Tower());
             }
+
+          
         }
 
         public void SetEnemyStagePerSecond()

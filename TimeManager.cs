@@ -20,7 +20,7 @@ namespace ConsoleProject2
 
         static public void TimerInit()
         {
-            roundTime = 60;
+            roundTime = StageManager.stageTime;
             roundCount = roundTime;
 
             enemyTickTimer = new System.Timers.Timer();

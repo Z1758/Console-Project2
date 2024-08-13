@@ -26,6 +26,10 @@ namespace ConsoleProject2
         static public int enemySetOneStage;
         static public int enemyCount;
 
+        static public int towerLimitCount;
+
+        static public int stageTime;
+
         static bool bossStage;
 
         public static Dictionary<int,EnemyInfo> EnemyInformations;
@@ -46,9 +50,25 @@ namespace ConsoleProject2
             EnemyInformations = new Dictionary<int, EnemyInfo>();
             SetEnemyInformation();
 
-            enemyLimitCount = 80;
-            enemySetOneStage = 50;
-            userGold = 100;
+         
+
+            if (RandomTowerDefense.mode == 0)
+            {
+                enemyLimitCount = 80;
+                enemySetOneStage = 50;
+                userGold = 100;
+                towerLimitCount = (Map.widthCenter - 2) * (Map.heightCenter - 2);
+
+                stageTime = 60;
+            }
+            else if (RandomTowerDefense.mode == 1)
+            {
+                enemyLimitCount = 60;
+                enemySetOneStage = 30;
+                userGold = 150;
+                towerLimitCount = Map.userSpaceCnt;
+                stageTime = 40;
+            }
             currentStage = 1;
             enemyCount = 0;
             bossStage = false;

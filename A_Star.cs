@@ -95,7 +95,7 @@ namespace ConsoleProject2
 
                     if (x < 0 || x >= Map.width || y < 0 || y >= Map.height)
                         continue;
-                    else if (tileMap[y, x] == PixelType.WALL || tileMap[y, x] == PixelType.USERSPACE)
+                    else if (tileMap[y, x] == PixelType.WALL || tileMap[y, x] == PixelType.RANDOMUSERSPACE)
                         continue;
                     else if (visited[y, x])
                         continue;

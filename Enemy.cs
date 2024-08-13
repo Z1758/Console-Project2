@@ -24,7 +24,7 @@ namespace ConsoleProject2
 
         public int moveTick;
 
-        List<Point> randomPath;
+        private List<Point> randomPath;
 
         public int CurHp { get => curHp;  }
         public int PosX { get => posX;  }
@@ -32,6 +32,9 @@ namespace ConsoleProject2
         public int DropGold { get => dropGold;  }
         public bool BossFlag { get => bossFlag; set => bossFlag = value; }
         public int MaxHp { get => maxHp; set => maxHp = value; }
+        public List<Point> RandomPath { get => randomPath; set => randomPath = value; }
+
+        public int pathListCnt;
 
         public event Action<Enemy> DisableEvent;
 
@@ -44,6 +47,8 @@ namespace ConsoleProject2
             dropGold = 0;
             bossFlag = false;
             moveTick = 0;
+            pathListCnt = 0;
+            RandomPath = null;
         }
 
         public void EnemyInitStatus(int maxHp, double moveSpeed, int dropGold )
@@ -57,7 +62,7 @@ namespace ConsoleProject2
             curHp = maxHp;
             this.moveSpeed = moveSpeed;
             this.dropGold = dropGold;
-
+            pathListCnt = 0;
         }
 
         public void MoveEnemy(object sender, System.Timers.ElapsedEventArgs e)
@@ -71,24 +76,38 @@ namespace ConsoleProject2
                 return;
             }
             moveTick = 0;
-            switch (moveState)
+
+            if (RandomPath != null)
             {
-                case EnemyMoveState.Down:
-                    GoDown();
-                    break;
-                case EnemyMoveState.Right:
-                    GoRight();
-                    break;
-                case EnemyMoveState.Up:
-                    GoUp();
-                    break;
-                case EnemyMoveState.Left:
-                    GoLeft();
-                    break;
-
-
+                if (RandomPath.Count > pathListCnt)
+                {
+                    posY = RandomPath[pathListCnt].y;
+                    posX = RandomPath[pathListCnt].x;
+                    pathListCnt++;
+                }
+              
             }
-      
+            else
+            {
+
+                switch (moveState)
+                {
+                    case EnemyMoveState.Down:
+                        GoDown();
+                        break;
+                    case EnemyMoveState.Right:
+                        GoRight();
+                        break;
+                    case EnemyMoveState.Up:
+                        GoUp();
+                        break;
+                    case EnemyMoveState.Left:
+                        GoLeft();
+                        break;
+
+
+                }
+            }
         }
 
         public void TakeDamage(int atk)

@@ -22,7 +22,7 @@ namespace ConsoleProject2
         const char border = '▣';
         const char randomEnemyPath = '▦';
 
-
+        public static int userSpaceCnt = 0;
         // 외부 
         static int borderPos = 0;
         static int widthBorder = width - 1;
@@ -49,6 +49,7 @@ namespace ConsoleProject2
         //픽셀 색 구분용
         public static int[,] pixelNum = new int[height, width];
 
+        public static List<Point> randomPath;
 
         static public void PixelMode1Init()
         {
@@ -137,7 +138,8 @@ namespace ConsoleProject2
         static public void PixelMode2Init()
         {
             Random ran = new Random();
-
+            
+           
       
 
             for (int i = 0; i < height; i++)
@@ -155,6 +157,7 @@ namespace ConsoleProject2
                     {
                         pixel[i, j] = userSpace;
                         pixelNum[i, j] = PixelType.RANDOMUSERSPACE;
+                      
                     }
                     else
                     {
@@ -164,7 +167,7 @@ namespace ConsoleProject2
                     }
                 }
             }
-
+            
             for (int i = 0; i < height; i++)
             {
                 for (int j = 0; j < width; j++)
@@ -178,6 +181,7 @@ namespace ConsoleProject2
                     {
                         pixel[i, j + 1] = randomEnemyPath;
                         pixelNum[i, j + 1] = PixelType.RANDOMENEMYPATH;
+                        
                         continue;
                     }
 
@@ -185,6 +189,7 @@ namespace ConsoleProject2
                     {
                         pixel[i +1, j] = randomEnemyPath;
                         pixelNum[i + 1, j] = PixelType.RANDOMENEMYPATH;
+                        
                         continue;
                     }
 
@@ -193,20 +198,39 @@ namespace ConsoleProject2
                     {
                         pixel[i, j + 1] = randomEnemyPath;
                         pixelNum[i, j + 1] = PixelType.RANDOMENEMYPATH;
+                       
                     }
                     else
                     {
                         pixel[i +1, j] = randomEnemyPath;
                         pixelNum[i + 1, j] = PixelType.RANDOMENEMYPATH;
+                        
                     }
+                  
                 }
             }
 
+            for (int i = 0; i < height; i++)
+            {
+
+                for (int j = 0; j < width; j++)
+                {
+                    if (pixelNum[i, j] == PixelType.RANDOMUSERSPACE)
+                    {
+                        userSpaceCnt++;
+
+                    }
+                    
+                }
+            }
+            A_Star.PathFinding(pixelNum, new Point(1, 1), new Point(Map.height - 2, Map.width - 2), out randomPath);
         }
 
 
         static public void DynamicDraw()
         {
+           
+            
 
             for (int i = enemyPathPos; i <= widthEnemyPath; i++)
             {
@@ -252,11 +276,35 @@ namespace ConsoleProject2
             }
         }
 
+        static public void DynamicRandomDraw()
+        {
+            foreach(Point point in randomPath)
+            {
+                pixel[point.y, point.x] = randomEnemyPath;
+                pixelNum[point.y, point.x] = PixelType.RANDOMENEMYPATH;
+            }
+
+            for (int i = borderPos+1; i <= heightBorder-1; i++)
+            {
+                for (int j = borderPos+1; j <= widthBorder-1; j++)
+                {
+                    if (pixelNum[i,j] > PixelType.USERSPACE)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        pixel[i, j] = userSpace;
 
 
+                        pixelNum[i, j] = PixelType.RANDOMUSERSPACE;
+                    }
+               
+                }
+            }
+        }
 
-
-        static public void DrawPixel()
+            static public void DrawPixel()
         {
        
           
@@ -394,7 +442,7 @@ namespace ConsoleProject2
                         pixel[i, j] = 'B';
                         Console.Write(pixel[i, j]);
                         Console.Write(1);
-
+                       
 
                     }
                     else if (10 + PixelType.ENEMY + 1 > pixelNum[i, j] && pixelNum[i, j] >= PixelType.ENEMIES)
@@ -404,14 +452,15 @@ namespace ConsoleProject2
                         pixel[i, j] = 'E';
                         Console.Write(pixel[i, j]);
 
-                        
 
+                    
                         Console.Write(pixelNum[i, j]- PixelType.ENEMY +1  );
 
 
                     }
                     else if(pixelNum[i, j] == PixelType.ENEMY){
                         //적
+                      
                         Console.ForegroundColor = CheckHp(i, j);
                         pixel[i, j] = 'E';
                         Console.Write(pixel[i, j]);
@@ -424,6 +473,7 @@ namespace ConsoleProject2
 
                     else
                     {
+                       
                         Console.Write(pixel[i, j]);
                     }
 
