@@ -55,13 +55,13 @@ namespace ConsoleProject2
 
         static void Main(string[] args)
         {
-            
-            
+
+            GameStart.StartScene();
             Init();
 
 
 
-
+            
 
             
 

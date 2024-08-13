@@ -48,8 +48,8 @@ namespace ConsoleProject2
 
             enemyLimitCount = 80;
             enemySetOneStage = 50;
-            userGold = 1000;
-            currentStage = 9;
+            userGold = 100;
+            currentStage = 1;
             enemyCount = 0;
             bossStage = false;
         }

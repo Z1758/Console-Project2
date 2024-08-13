@@ -13,7 +13,7 @@ namespace ConsoleProject2
         {
             Console.Clear();
 
-            Console.ForegroundColor = ConsoleColor.DarkRed;
+     
 
 
             Console.WriteLine();
@@ -40,10 +40,12 @@ namespace ConsoleProject2
 
             if (flag)
             {
+                Console.ForegroundColor = ConsoleColor.White;
                 output = clear;
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 output = gameover;
             }
 
