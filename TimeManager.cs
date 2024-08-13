@@ -40,6 +40,16 @@ namespace ConsoleProject2
             roundTimer.Start();
         }
 
+        static public void EndTimer()
+        {
+            enemyTickTimer.Dispose();
+            towerTickTimer.Dispose();
+            roundTimer.Dispose();
+
+            RoundEvent = null;
+            NextStage = null;
+        }
+
         static void RoundTimer(object sender, System.Timers.ElapsedEventArgs e)
         {
 
@@ -53,19 +63,13 @@ namespace ConsoleProject2
                 if (StageManager.currentStage == 10)
                 {
                     RoundEvent();
-                } else if (StageManager.currentStage > 10)
-                {
-                    //게임오버 구현
-                }
+                } 
 
             }
 
             if (roundTime - StageManager.enemySetOneStage <= roundCount && StageManager.currentStage < 10)
             {
-                if (StageManager.enemyCount >= StageManager.enemyLimitCount)
-                {
-                    //게임오버 구현
-                }
+                
                 RoundEvent();
             }
 

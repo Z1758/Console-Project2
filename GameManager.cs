@@ -41,6 +41,11 @@
 
         public void CheckEnemy()
         {
+            if (activeEnemies.Count <= 0)
+            {
+                return;
+            }
+
             int bossIndex = 0;
             for (int i = 0; i < activeEnemies.Count; i++)
             {
@@ -66,6 +71,7 @@
             }
             if (CheckBossStage())
             {
+                
                 Map.pixelNum[activeEnemies[bossIndex].PosY, activeEnemies[bossIndex].PosX] = PixelType.BOSS;
             }
           

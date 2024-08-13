@@ -55,7 +55,6 @@ namespace ConsoleProject2
         }
 
 
-
         static public void SetEnemyInformation()
         {
             EnemyInformations.Add(1, new EnemyInfo { hp = 100,  moveSpeed = 8, dropGold = 10 });

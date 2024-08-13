@@ -211,7 +211,7 @@ namespace ConsoleProject2
                         if(i == 0)
                         {
                             Console.ForegroundColor = ConsoleColor.White;
-                            Console.Write($"    스테이지");
+                            Console.Write($"   스테이지");
                             Console.Write($" {StageManager.currentStage}");
                         }
                         if (i == 1)
