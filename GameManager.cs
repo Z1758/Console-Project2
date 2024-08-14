@@ -83,7 +83,16 @@
         {
             for (int i = 0; i < activeTowers.Count; i++)
             {
-                Map.pixelNum[activeTowers[i].PosY, activeTowers[i].PosX] = activeTowers[i].Grade;
+                if(0.1<= activeTowers[i].AtkTick && activeTowers[i].AtkTick < activeTowers[i].AtkSpeed)
+
+                {
+                    Map.pixelNum[activeTowers[i].PosY, activeTowers[i].PosX] = PixelType.COOLDOWNTOWER;
+                }
+                else
+                {
+                    Map.pixelNum[activeTowers[i].PosY, activeTowers[i].PosX] = activeTowers[i].Grade;
+                }
+               
                 Map.pixel[activeTowers[i].PosY, activeTowers[i].PosX] = activeTowers[i].Type;
 
             }
@@ -509,7 +518,7 @@
             {
                 if (activeTowers[i].PosX == player.PosX && activeTowers[i].PosY == player.PosY)
                 {
-                    if (activeTowers[i].Grade >= PixelType.GRADE_S)
+                    if (activeTowers[i].Grade >= PixelType.GRADE_S )
                     {
                         return;
                     }

@@ -452,6 +452,17 @@ namespace ConsoleProject2
                             //타워 등급
                             Console.ForegroundColor = ConsoleColor.Yellow;
                             break;
+                        case PixelType.COOLDOWNTOWER:
+                            //쿨다운중인 타워
+                            if (RandomTowerDefense.mode == 0)
+                            {
+                                Console.ForegroundColor = ConsoleColor.DarkGray;
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.Black;
+                            }
+                            break;
                         case PixelType.PLAYER:
                             //유저 위치
                             

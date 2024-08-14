@@ -10,7 +10,7 @@ namespace ConsoleProject2
     {
         private int posX, posY;
         private int attack;
-        private double atkSpeed;
+        private int atkSpeed;
         private int range;
         private char type;
         private int grade;
@@ -25,6 +25,7 @@ namespace ConsoleProject2
         public int AtkTick { get => atkTick; set => atkTick = value; }
         public char Type { get => type;  }
         public int Grade { get => grade; }
+        public int AtkSpeed { get => atkSpeed; set => atkSpeed = value; }
 
         public event Action<Tower> AttackEvent;
         public event Action<Tower> DisableEvent;
@@ -34,7 +35,7 @@ namespace ConsoleProject2
             posX = 0; posY =0 ;
             attack = 0;
             type = 'M';
-            atkSpeed = 0;
+            AtkSpeed = 0;
             grade = 0;
 
             AtkTick = 0;
@@ -44,7 +45,7 @@ namespace ConsoleProject2
         {
            
             this.posX = posX; this.posY = posY;
-            AtkTick = 0;
+            AtkTick = AtkSpeed;
 
         }
 
@@ -55,7 +56,7 @@ namespace ConsoleProject2
                 case PixelType.GRADE_C_POWER:
                     {
                         attack = 30;
-                        atkSpeed = 10;
+                        AtkSpeed = 10;
                         range = 3;
                         type = '♡';
                         grade = PixelType.GRADE_C; 
@@ -64,7 +65,7 @@ namespace ConsoleProject2
                 case PixelType.GRADE_C_SPEED:
                     {
                         attack = 20;
-                        atkSpeed = 8;
+                        AtkSpeed = 8;
                         range = 3;
                         type = '☆';
                         grade = PixelType.GRADE_C;
@@ -73,7 +74,7 @@ namespace ConsoleProject2
                 case PixelType.GRADE_C_RANGE:
                     {
                         attack = 20;
-                        atkSpeed = 10;
+                        AtkSpeed = 10;
                         range = 4;
                         type = '◇';
                         grade = PixelType.GRADE_C;
@@ -84,7 +85,7 @@ namespace ConsoleProject2
                 case PixelType.GRADE_B_POWER:
                     {
                         attack = 50;
-                        atkSpeed = 9;
+                        AtkSpeed = 9;
                         range = 4;
                         type = '♥';
                         grade = PixelType.GRADE_B;
@@ -93,7 +94,7 @@ namespace ConsoleProject2
                 case PixelType.GRADE_B_SPEED:
                     {
                         attack = 30;
-                        atkSpeed = 7;
+                        AtkSpeed = 7;
                         range = 4;
                         type = '★';
                         grade = PixelType.GRADE_B;
@@ -102,7 +103,7 @@ namespace ConsoleProject2
                 case PixelType.GRADE_B_RANGE:
                     {
                         attack = 30;
-                        atkSpeed = 9;
+                        AtkSpeed = 9;
                         range = 5;
                         type = '◈';
                         grade = PixelType.GRADE_B;
@@ -114,7 +115,7 @@ namespace ConsoleProject2
                 case PixelType.GRADE_A_POWER:
                     {
                         attack = 110;
-                        atkSpeed = 8;
+                        AtkSpeed = 8;
                         range = 5;
                         type = '♣';
                         grade = PixelType.GRADE_A;
@@ -123,7 +124,7 @@ namespace ConsoleProject2
                 case PixelType.GRADE_A_SPEED:
                     {
                         attack = 60;
-                        atkSpeed = 5;
+                        AtkSpeed = 5;
                         range = 5;
                         type = '♬';
                         grade = PixelType.GRADE_A;
@@ -132,7 +133,7 @@ namespace ConsoleProject2
                 case PixelType.GRADE_A_RANGE:
                     {
                         attack = 80;
-                        atkSpeed = 8;
+                        AtkSpeed = 8;
                         range = 6;
                         type = '●';
                         grade = PixelType.GRADE_A;
@@ -144,7 +145,7 @@ namespace ConsoleProject2
                 case PixelType.GRADE_S_POWER:
                     {
                         attack = 180;
-                        atkSpeed = 7;
+                        AtkSpeed = 7;
                         range = 6;
                         type = '♨';
                         grade = PixelType.GRADE_S;
@@ -153,7 +154,7 @@ namespace ConsoleProject2
                 case PixelType.GRADE_S_SPEED:
                     {
                         attack = 80;
-                        atkSpeed = 3;
+                        AtkSpeed = 3;
                         range = 6;
                         type = '㉿';
                         grade = PixelType.GRADE_S;
@@ -162,7 +163,7 @@ namespace ConsoleProject2
                 case PixelType.GRADE_S_RANGE:
                     {
                         attack = 120;
-                        atkSpeed = 7;
+                        AtkSpeed = 7;
                         range = 8;
                         type = '☎';
                         grade = PixelType.GRADE_S;
@@ -180,7 +181,7 @@ namespace ConsoleProject2
            
 
 
-            if (AtkTick < atkSpeed)
+            if (AtkTick < AtkSpeed)
             {
                 return;
             }

@@ -54,6 +54,8 @@ namespace ConsoleProject2
         public const int GRADE_A = 3000;
         public const int GRADE_S = 4000;
 
+        public const int COOLDOWNTOWER = 6666;
+
 
         public const int END = 99999;
     }
