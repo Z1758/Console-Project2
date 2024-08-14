@@ -45,6 +45,7 @@ namespace ConsoleProject2
             Console.ReadKey();
 
             Console.ResetColor();
+
             Console.Clear();
 
         }

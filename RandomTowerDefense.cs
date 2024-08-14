@@ -165,6 +165,7 @@ namespace ConsoleProject2
         static public void SelectMode()
         {
             ClearBuffer();
+            Thread.Sleep(500);
             int select = 0;
             Console.WriteLine("             맵 선택");
             Console.WriteLine(  "0. 클래식 맵(디폴트)     1. 랜덤 맵");
