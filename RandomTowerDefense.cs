@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Numerics;
 using System.Runtime.InteropServices;
 
 namespace ConsoleProject2
@@ -79,16 +80,45 @@ namespace ConsoleProject2
 
 
 
-            while (EndGameCheck())
+            while (true)
             {
                 Update();
+                if (EndGameCheck()==false)
+                {
+                    EndGame();
 
+                    if (SelectReStart() ==false)
+                    {
+                        break;
+                    }
+                    ReStartInit();
+                    clearFlag = false;
+                }
+
+                
             }
-            EndGame();
+           
 
         }
 
+        static void ReStartInit()
+        {
+            switch (mode)
+            {
+                case 0:
+                    Map.PixelMode1Init();
+                    break;
+                case 1:
+                    Map.PixelMode2Init();
+                    break;
 
+            }
+            StageManager.StageManagerInit();
+            gameManager.ReStart();
+            TimeManager.TimerInit();
+
+
+        }
 
         static public bool EndGameCheck()
         {
@@ -139,6 +169,28 @@ namespace ConsoleProject2
             ClearBuffer();
             Console.Clear();
         }
+        static public bool SelectReStart()
+        {
+            ClearBuffer();
+            int rSelect =' ';
+
+            int.TryParse(Console.ReadLine(), out rSelect);
+
+            if(rSelect == 1)
+            {
+                Console.Clear();
+                return true;
+            }
+            else
+            {
+                Console.Clear();
+                return false;
+            }
+
+        }
+
+
+
 
         //키 입력 버퍼 지우기
         static void ClearBuffer()

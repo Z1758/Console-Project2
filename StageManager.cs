@@ -48,19 +48,23 @@ namespace ConsoleProject2
 
         static public void StageManagerInit()
         {
-            EnemyInformations = new Dictionary<int, EnemyInfo>();
-            SetEnemyInformation();
+            if (EnemyInformations == null)
+            {
 
-         
+            
+                EnemyInformations = new Dictionary<int, EnemyInfo>();
+                SetEnemyInformation();
+            }
+
 
             if (RandomTowerDefense.mode == 0)
             {
                 enemyLimitCount = 80;
-                enemySetOneStage = 50;
+                enemySetOneStage = 40;
                 userGold = 100;
                 towerLimitCount = (Map.widthCenter - 2) * (Map.heightCenter - 2);
 
-                stageTime = 60;
+                stageTime = 50;
             }
             else if (RandomTowerDefense.mode == 1)
             {
@@ -78,6 +82,7 @@ namespace ConsoleProject2
 
         static public void SetEnemyInformation()
         {
+          
             
                 EnemyInformations.Add(1, new EnemyInfo { hp = 100, moveSpeed = 4, dropGold = 10 + RandomTowerDefense.mode * 10 });
                 EnemyInformations.Add(2, new EnemyInfo { hp = 250, moveSpeed = 5, dropGold = 10 + RandomTowerDefense.mode * 10 });

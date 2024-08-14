@@ -138,9 +138,10 @@ namespace ConsoleProject2
         static public void PixelMode2Init()
         {
             Random ran = new Random();
-            
-           
-      
+            userSpaceCnt = 0;
+
+
+
 
             for (int i = 0; i < height; i++)
             {

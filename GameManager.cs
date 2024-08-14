@@ -28,6 +28,24 @@
 
         }
 
+        public void ReStart()
+        {
+            
+            disabledEnemyQueue.Clear();
+            disabledTowerQueue.Clear();
+            activeEnemies.Clear();
+            activeTowers.Clear();
+            player.PosX = Map.centerPos;
+            player.PosY = Map.centerPos;
+
+           
+            InitObj();
+            TimeManager.RoundEvent += SetEnemyStagePerSecond;
+            TimeManager.NextStage += CurrentEnemyInfoSet;
+
+            CurrentEnemyInfoSet();
+        }
+
         public void SetPlayer(Player player)
         {
             this.player = player;
@@ -341,7 +359,7 @@
             if (RandomTowerDefense.mode == 1)
             {
                
-                for (int i = 0; i < StageManager.enemyLimitCount*1.5; i++)
+                for (int i = 0; i < StageManager.enemyLimitCount*2; i++)
                 {
                     Enemy enemy = new Enemy();
                     enemy.RandomPath = Map.randomPath;

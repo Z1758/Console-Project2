@@ -101,7 +101,7 @@ namespace ConsoleProject2
             Console.ResetColor();
 
 
-            Console.ReadKey(true);
+            Console.WriteLine("Continue? Yes == 1 \n");
         } 
     }
 }
