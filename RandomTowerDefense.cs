@@ -61,24 +61,7 @@ namespace ConsoleProject2
         static void Main(string[] args)
         {
 
-            GameStart.StartScene();
-            SelectMode();
-            switch (mode)
-            {
-                case 0:
-                    Map.PixelMode1Init();
-                    break;
-                case 1:
-                    Map.PixelMode2Init();
-                    break;
-
-            }
-
-
-
-            Init();
-
-
+            Start();
 
             while (true)
             {
@@ -99,6 +82,28 @@ namespace ConsoleProject2
             }
            
 
+        }
+
+        static void Start()
+        {
+
+
+            GameStart.StartScene();
+            SelectMode();
+            switch (mode)
+            {
+                case 0:
+                    Map.PixelMode1Init();
+                    break;
+                case 1:
+                    Map.PixelMode2Init();
+                    break;
+
+            }
+
+
+
+            Init();
         }
 
         static void ReStartInit()
