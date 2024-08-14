@@ -131,7 +131,8 @@ namespace ConsoleProject2
         {
             ClearBuffer();
             int select = 0;
-            Console.WriteLine("모드 선택 0,1  기본 0");
+            Console.WriteLine("             맵 선택");
+            Console.WriteLine(  "0. 클래식 맵(디폴트)     1. 랜덤 맵");
             int.TryParse(Console.ReadLine() , out select);
 
             mode = select;

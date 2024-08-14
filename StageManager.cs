@@ -70,7 +70,7 @@ namespace ConsoleProject2
                 towerLimitCount = Map.userSpaceCnt;
                 stageTime = 40;
             }
-            currentStage = 9;
+            currentStage = 1;
             gameoverCount = enemyLimitCount;
             bossStage = false;
         }
@@ -88,7 +88,7 @@ namespace ConsoleProject2
                 EnemyInformations.Add(7, new EnemyInfo { hp = 800, moveSpeed = 4, dropGold = 10 + RandomTowerDefense.mode * 10 });
                 EnemyInformations.Add(8, new EnemyInfo { hp = 700, moveSpeed = 2, dropGold = 10 + RandomTowerDefense.mode * 10 });
                 EnemyInformations.Add(9, new EnemyInfo { hp = 900, moveSpeed = 6, dropGold = 10 + RandomTowerDefense.mode * 10 });
-                EnemyInformations.Add(10, new EnemyInfo { hp = 10000, moveSpeed = 4, dropGold = 100 });
+                EnemyInformations.Add(10, new EnemyInfo { hp = 8000, moveSpeed = 4, dropGold = 100 });
                 EnemyInformations.Add(11, new EnemyInfo { hp = 50000, moveSpeed = 4, dropGold = 100 });
             
            
