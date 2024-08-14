@@ -11,6 +11,8 @@ namespace ConsoleProject2
 
         public static int mode;
 
+        public static bool clearFlag =false;
+
         static public void Init()
         {
 
@@ -26,10 +28,12 @@ namespace ConsoleProject2
 
             TimeManager.TimerInit();
         }
-
-
-        static public void Update()
+      
+        static public void Drawing()
         {
+
+            
+
             if (mode == 0)
             {
                 Map.DynamicDraw();
@@ -38,34 +42,21 @@ namespace ConsoleProject2
             {
                 Map.DynamicRandomDraw();
             }
-            
-           
+
+
             gameManager.CheckDraw();
 
             Map.DrawPixel();
 
+        }
+
+        static public void Update()
+        {
+            Drawing();
             gameManager.InputKey();
 
            
         }
-
-        static public bool EndGameCheck()
-        {
-            if (StageManager.enemyCount >= StageManager.enemyLimitCount || StageManager.currentStage > 10)
-            {
-                TimeManager.EndTimer();
-                return false;
-
-            }
-
-            return true;
-        }
-
-        static public void EndGame(){
-            GamaOver.OutPutGameOver( StageManager.enemyCount == 0 );
-        }
-
-
         static void Main(string[] args)
         {
 
@@ -82,8 +73,8 @@ namespace ConsoleProject2
 
             }
 
-      
-            
+
+
             Init();
 
 
@@ -91,11 +82,50 @@ namespace ConsoleProject2
             while (EndGameCheck())
             {
                 Update();
-                
+
             }
             EndGame();
 
         }
+
+
+
+        static public bool EndGameCheck()
+        {
+            if (clearFlag)
+            {
+                return false;
+            }
+
+            if (StageManager.gameoverCount <= 0|| StageManager.currentStage > 10)
+            {
+              
+                return false;
+
+            }
+
+            return true;
+        }
+
+        static public void EndGame(){
+            TimeManager.EndTimer();
+            Drawing();
+            
+            Thread.Sleep(1000);
+            if (mode == 0)
+            {
+                GamaOver.OutPutGameOver(StageManager.gameoverCount == StageManager.enemyLimitCount);
+            }
+
+            else if (mode == 1)
+            {
+
+                GamaOver.OutPutGameOver(StageManager.gameoverCount > 0);
+            }
+        }
+
+
+      
 
         static public void SelectMode()
         {

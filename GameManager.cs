@@ -110,8 +110,11 @@
         public void ChechkPlayer()
         {
             int playerNum = Map.pixelNum[player.PosY, player.PosX];
-
-            if ( playerNum  >= PixelType.ENEMY && playerNum < PixelType.RANDOMUSERSPACE)
+            if (playerNum == PixelType.BOSS)
+            {
+                Map.pixelNum[player.PosY, player.PosX] = PixelType.OVERLAPPLAYERBOSS;
+            }
+            else if ( playerNum  >= PixelType.ENEMY && playerNum < PixelType.RANDOMUSERSPACE)
             {
                 Map.pixelNum[player.PosY, player.PosX] = PixelType.OVERLAPPLAYERENEMY + playerNum;
             }
@@ -138,7 +141,7 @@
 
         public void AttackCollider(Tower tower)
         {
-            if (StageManager.enemyCount == 0)
+            if (StageManager.gameoverCount == StageManager.enemyLimitCount && RandomTowerDefense.mode == 0)
             {
                 return;
             }
@@ -155,7 +158,16 @@
                     {
                         for (int j = tower.PosX - tower.Range; j < tower.PosX + tower.Range; j++)
                         {
-                           
+                                if(i < 0 || j <0 ||
+                                   i > Map.height || j >Map.width
+                                )
+                                {
+                                    continue;
+                                }
+                                if (e >= activeEnemies.Count)
+                                {
+                                    return;
+                                }
                                 if (activeEnemies[e].PosY == i && activeEnemies[e].PosX == j)
                                 {
                                     if (activeEnemies[e].CurHp <= 0)
@@ -262,20 +274,52 @@
             TimeManager.AddEnemyMoveEvent(enemy);
 
             activeEnemies.Add(enemy);
-            StageManager.enemyCount++;
+
+            if (RandomTowerDefense.mode == 0)
+            {
+                StageManager.gameoverCount--;
+            }
 
     
         }
         public void DisableEnemy(Enemy enemy)
         {
 
+            
             enemy.DisableEvent -= DisableEnemy;
             TimeManager.RemoveEnemyMoveEvent(enemy);
 
             activeEnemies.Remove(enemy);
 
             disabledEnemyQueue.Enqueue(enemy);
-            StageManager.enemyCount--;
+
+
+            if (RandomTowerDefense.mode == 0)
+            {
+                StageManager.gameoverCount++;
+            }
+            else if (RandomTowerDefense.mode == 1)
+            {
+                // 적이 죽은게 아니고 목적지에 도착했을때
+                if (enemy.CurHp > 0)
+                {
+                    StageManager.gameoverCount--;
+
+                    if (enemy.BossFlag)
+                    {
+                        StageManager.gameoverCount = 0;
+                    }
+
+                    return;
+                }
+            }
+
+            if (enemy.BossFlag)
+            {
+                RandomTowerDefense.clearFlag = true;
+            }
+
+            
             StageManager.SetGold(enemy.DropGold);
 
 
@@ -288,7 +332,7 @@
             if (RandomTowerDefense.mode == 1)
             {
                
-                for (int i = 0; i < StageManager.enemyLimitCount; i++)
+                for (int i = 0; i < StageManager.enemyLimitCount*1.5; i++)
                 {
                     Enemy enemy = new Enemy();
                     enemy.RandomPath = Map.randomPath;

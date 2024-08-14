@@ -22,6 +22,7 @@ namespace ConsoleProject2
         public const int RANDOMENEMYPATH = 502;
 
         public const int OVERLAPPLAYERENEMY = 600;
+        public const int OVERLAPPLAYERBOSS = 650;
         public const int OVERLAPPLAYERPATH = 700;
 
         public const int GRADE_C_START = 1001;

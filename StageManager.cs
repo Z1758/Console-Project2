@@ -24,7 +24,8 @@ namespace ConsoleProject2
         static public int currentStage;
         static public int enemyLimitCount;
         static public int enemySetOneStage;
-        static public int enemyCount;
+
+        static public int gameoverCount;
 
         static public int towerLimitCount;
 
@@ -56,21 +57,21 @@ namespace ConsoleProject2
             {
                 enemyLimitCount = 80;
                 enemySetOneStage = 50;
-                userGold = 1000;
+                userGold = 100;
                 towerLimitCount = (Map.widthCenter - 2) * (Map.heightCenter - 2);
 
                 stageTime = 60;
             }
             else if (RandomTowerDefense.mode == 1)
             {
-                enemyLimitCount = 60;
+                enemyLimitCount = 50;
                 enemySetOneStage = 30;
                 userGold = 200;
                 towerLimitCount = Map.userSpaceCnt;
                 stageTime = 40;
             }
-            currentStage = 1;
-            enemyCount = 0;
+            currentStage = 9;
+            gameoverCount = enemyLimitCount;
             bossStage = false;
         }
 
@@ -86,8 +87,8 @@ namespace ConsoleProject2
                 EnemyInformations.Add(6, new EnemyInfo { hp = 750, moveSpeed = 4, dropGold = 10 + RandomTowerDefense.mode * 10 });
                 EnemyInformations.Add(7, new EnemyInfo { hp = 800, moveSpeed = 4, dropGold = 10 + RandomTowerDefense.mode * 10 });
                 EnemyInformations.Add(8, new EnemyInfo { hp = 700, moveSpeed = 2, dropGold = 10 + RandomTowerDefense.mode * 10 });
-                EnemyInformations.Add(9, new EnemyInfo { hp = 1200, moveSpeed = 6, dropGold = 10 + RandomTowerDefense.mode * 10 });
-                EnemyInformations.Add(10, new EnemyInfo { hp = 15000, moveSpeed = 4, dropGold = 100 });
+                EnemyInformations.Add(9, new EnemyInfo { hp = 900, moveSpeed = 6, dropGold = 10 + RandomTowerDefense.mode * 10 });
+                EnemyInformations.Add(10, new EnemyInfo { hp = 10000, moveSpeed = 4, dropGold = 100 });
                 EnemyInformations.Add(11, new EnemyInfo { hp = 50000, moveSpeed = 4, dropGold = 100 });
             
            

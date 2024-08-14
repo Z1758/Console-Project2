@@ -77,13 +77,18 @@ namespace ConsoleProject2
             }
             moveTick = 0;
 
-            if (RandomPath != null)
+            if (RandomPath != null )
             {
                 if (RandomPath.Count > pathListCnt)
                 {
                     posY = RandomPath[pathListCnt].y;
                     posX = RandomPath[pathListCnt].x;
                     pathListCnt++;
+                }
+                else if(RandomPath.Count == pathListCnt && moveState != EnemyMoveState.END)
+                {
+                    moveState = EnemyMoveState.END;
+                    Disable();
                 }
               
             }
@@ -112,7 +117,7 @@ namespace ConsoleProject2
 
         public void TakeDamage(int atk)
         {
-            if (CurHp <= 0)
+            if (CurHp <= 0 || moveState == EnemyMoveState.END)
             {
                 return;
             }

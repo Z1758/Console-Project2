@@ -221,28 +221,23 @@ namespace ConsoleProject2
                         continue;
 
                     }
-
-                    foreach (Point point in randomPath)
-                    {
-                        if(point.x == j && point.y == i)
-                        {
-
-                        }
-                        else
-                        {
-
-                            pixel[i, j] = userSpace;
-                            pixelNum[i, j] = PixelType.RANDOMUSERSPACE;
-                            userSpaceCnt++;
-                        }
-                    }
+                    pixel[i, j] = userSpace;
+                    pixelNum[i, j] = PixelType.RANDOMUSERSPACE;
+                    userSpaceCnt++;
+                 
 
                    
                     
                 }
             }
 
-
+            foreach (Point point in randomPath)
+            {
+                pixel[point.y, point.x] = randomEnemyPath;
+                pixelNum[point.y, point.x] = PixelType.RANDOMENEMYPATH;
+                userSpaceCnt--;
+               
+            }
 
         }
 
@@ -371,8 +366,8 @@ namespace ConsoleProject2
                         if (i == 1)
                         {
                             Console.ForegroundColor = ConsoleColor.White;
-                            Console.Write($"   적 수");
-                            Console.Write($" {StageManager.enemyCount:00}/{StageManager.enemyLimitCount}");
+                            Console.Write($"   남은 체력");
+                            Console.Write($" {StageManager.gameoverCount:00}");
 
 
                         }
@@ -493,6 +488,8 @@ namespace ConsoleProject2
                     else if (10 + PixelType.ENEMY + 1 > pixelNum[i, j] && pixelNum[i, j] >= PixelType.ENEMIES)
                     {
                         //겹쳐있는 적
+                     
+
                         Console.ForegroundColor = CheckHp(i, j);
                         pixel[i, j] = 'E';
                         Console.Write(pixel[i, j]);
@@ -505,7 +502,10 @@ namespace ConsoleProject2
                     }
                     else if(pixelNum[i, j] == PixelType.ENEMY){
                         //적
-                       
+
+                  
+
+
                         Console.ForegroundColor = CheckHp(i, j);
                       
                         pixel[i, j] = 'E';
@@ -515,7 +515,20 @@ namespace ConsoleProject2
 
 
                     }
-                    else if (PixelType.OVERLAPPLAYERPATH > pixelNum[i, j] && pixelNum[i, j] >= PixelType.OVERLAPPLAYERENEMY)
+                    else if (pixelNum[i, j] == PixelType.OVERLAPPLAYERBOSS)
+                    {
+                        //적과 보스 오버랩
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.BackgroundColor = ConsoleColor.White;
+
+                        pixel[i, j] = 'B';
+                        Console.Write(pixel[i, j]);
+                        Console.Write(1);
+
+
+
+                    }
+                    else if (PixelType.OVERLAPPLAYERBOSS > pixelNum[i, j] && pixelNum[i, j] >= PixelType.OVERLAPPLAYERENEMY)
                     {
                         //적과 플레이어 오버랩
                         Console.ForegroundColor = ConsoleColor.Black;
@@ -559,6 +572,8 @@ namespace ConsoleProject2
         static public ConsoleColor CheckHp(int y, int x)
         {
             Console.ResetColor();
+
+
             for (int i = 0; i < RandomTowerDefense.gameManager.activeEnemies.Count; i++)
             {
                 if (RandomTowerDefense.gameManager.activeEnemies[i].PosX == x && RandomTowerDefense.gameManager.activeEnemies[i].PosY == y)

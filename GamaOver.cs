@@ -48,13 +48,11 @@ namespace ConsoleProject2
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 output = gameover;
             }
-            Console.WriteLine();
-            Console.WriteLine(); 
-            Console.WriteLine();
-
+         
             int cnt = 0;
             while (cnt < output[3].Length)
             {
+                
                 Console.CursorVisible = false;
                 Console.SetCursorPosition(0, 0);
                 Thread.Sleep(10);
@@ -63,6 +61,7 @@ namespace ConsoleProject2
 
                 for (int i = 0; i < output.Length; i++)
                 {
+                 
                     for (int j = 0; j < output[i].Length; j++)
                     {
                         z = output[i].Length - 1;
