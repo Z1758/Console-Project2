@@ -9,5 +9,6 @@ namespace ConsoleProject2
     public interface IDynamicObject
     {
         public void Disable();
+        public void MoveAction(object sender, System.Timers.ElapsedEventArgs e);
     }
 }

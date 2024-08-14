@@ -79,25 +79,25 @@ namespace ConsoleProject2
         static public void AddEnemyMoveEvent(Enemy enemy)
         {
 
-            enemyTickTimer.Elapsed += new System.Timers.ElapsedEventHandler(enemy.MoveEnemy);
+            enemyTickTimer.Elapsed += new System.Timers.ElapsedEventHandler(enemy.MoveAction);
         }
 
         static public void RemoveEnemyMoveEvent(Enemy enemy)
         {
 
-            enemyTickTimer.Elapsed -= new System.Timers.ElapsedEventHandler(enemy.MoveEnemy);
+            enemyTickTimer.Elapsed -= new System.Timers.ElapsedEventHandler(enemy.MoveAction);
         }
 
         static public void AddTowerAttackEvent(Tower tower)
         {
 
-            towerTickTimer.Elapsed += new System.Timers.ElapsedEventHandler(tower.AttackTower);
+            towerTickTimer.Elapsed += new System.Timers.ElapsedEventHandler(tower.MoveAction);
         }
 
         static public void RemoveTowerAttackEvent(Tower tower)
         {
 
-            towerTickTimer.Elapsed -= new System.Timers.ElapsedEventHandler(tower.AttackTower);
+            towerTickTimer.Elapsed -= new System.Timers.ElapsedEventHandler(tower.MoveAction);
         }
 
 

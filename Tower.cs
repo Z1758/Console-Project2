@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace ConsoleProject2
 {
@@ -173,19 +174,19 @@ namespace ConsoleProject2
             }
         }
 
-        public void AttackTower(object sender, System.Timers.ElapsedEventArgs e)
-        {
 
+        public void MoveAction(object sender, ElapsedEventArgs e)
+        {
             AtkTick++;
 
-           
+
 
 
             if (AtkTick < AtkSpeed)
             {
                 return;
             }
-           
+
             AttackEvent(this);
 
         }
@@ -194,5 +195,6 @@ namespace ConsoleProject2
         {
             DisableEvent(this);
         }
+
     }
 }

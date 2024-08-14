@@ -101,7 +101,7 @@ namespace ConsoleProject2
             Console.ResetColor();
 
 
-            Console.WriteLine("Continue? Yes == 1 \n");
+            Console.WriteLine("ReStart? Yes == 1 \n");
         } 
     }
 }

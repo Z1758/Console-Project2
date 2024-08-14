@@ -65,7 +65,7 @@ namespace ConsoleProject2
             pathListCnt = 0;
         }
 
-        public void MoveEnemy(object sender, System.Timers.ElapsedEventArgs e)
+        public void MoveAction(object sender, System.Timers.ElapsedEventArgs e)
         {
 
             moveTick++;
@@ -77,7 +77,7 @@ namespace ConsoleProject2
             }
             moveTick = 0;
 
-            if (RandomPath != null )
+            if (RandomPath != null)
             {
                 if (RandomPath.Count > pathListCnt)
                 {
@@ -85,12 +85,12 @@ namespace ConsoleProject2
                     posX = RandomPath[pathListCnt].x;
                     pathListCnt++;
                 }
-                else if(RandomPath.Count == pathListCnt && moveState != EnemyMoveState.END)
+                else if (RandomPath.Count == pathListCnt && moveState != EnemyMoveState.END)
                 {
                     moveState = EnemyMoveState.END;
                     Disable();
                 }
-              
+
             }
             else
             {
@@ -114,7 +114,7 @@ namespace ConsoleProject2
                 }
             }
         }
-
+    
         public void TakeDamage(int atk)
         {
             if (CurHp <= 0 || moveState == EnemyMoveState.END)
