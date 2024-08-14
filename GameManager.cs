@@ -113,8 +113,13 @@
 
             if ( playerNum  >= PixelType.ENEMY && playerNum < PixelType.RANDOMUSERSPACE)
             {
-                Map.pixelNum[player.PosY, player.PosX] = PixelType.OVERLAPPLAYER+ playerNum;
+                Map.pixelNum[player.PosY, player.PosX] = PixelType.OVERLAPPLAYERENEMY + playerNum;
             }
+            else if (playerNum == PixelType.RANDOMENEMYPATH)
+            {
+                Map.pixelNum[player.PosY, player.PosX] = PixelType.OVERLAPPLAYERPATH ;
+            }
+
             else
             {
                 Map.pixelNum[player.PosY, player.PosX] = PixelType.PLAYER;
@@ -139,47 +144,9 @@
             }
 
 
-            //타워의 범위부터 계산
-            /*
-            for(int i = tower.PosY - tower.Range ; i < tower.PosY+ tower.Range ; i++)
-            {
-                for (int j = tower.PosX - tower.Range  ; j <  tower.PosX+ tower.Range; j++)
-                {
-                    if (i == Map.enemyPathPos && (Map.enemyPathPos <= j && j <= Map.widthEnemyPath) ||
-                             j == Map.widthEnemyPath && (Map.enemyPathPos + 1 <= i && i <= Map.heightEnemyPath) ||
-                             i == Map.heightEnemyPath && (Map.enemyPathPos <= j && j <= Map.widthEnemyPath - 1) ||
-                             j == Map.enemyPathPos && (Map.enemyPathPos + 1 <= i && i <= Map.heightEnemyPath - 1))
-                    {
+          
 
-                        for (int e = 0; e < activeEnemies.Count; e++)
-                        {
-                            if (activeEnemies[e] != null)
-                            {
-                                if (activeEnemies[e].posY == i && activeEnemies[e].posX == j)
-                                {
-                                    if (activeEnemies[e].CurHp <= 0)
-                                    {
-                                        continue;
-                                    }
-
-                                    activeEnemies[e].TakeDamage(tower.Attack);
-                                    tower.AtkTick = 0;
-
-                                 
-
-                                    return;
-                                }
-
-                            }
-
-
-                        }
-                    }
-                }
-            }
-            */
-
-            // 제일 먼저 나온적부터 공격
+           
             for (int e = 0; e < activeEnemies.Count; e++)
             {
                 if (activeEnemies[e] != null)
@@ -188,11 +155,7 @@
                     {
                         for (int j = tower.PosX - tower.Range; j < tower.PosX + tower.Range; j++)
                         {
-                            /*if (i == Map.enemyPathPos && (Map.enemyPathPos <= j && j <= Map.widthEnemyPath) ||
-                                     j == Map.widthEnemyPath && (Map.enemyPathPos + 1 <= i && i <= Map.heightEnemyPath) ||
-                                     i == Map.heightEnemyPath && (Map.enemyPathPos <= j && j <= Map.widthEnemyPath - 1) ||
-                                     j == Map.enemyPathPos && (Map.enemyPathPos + 1 <= i && i <= Map.heightEnemyPath - 1))
-                            {*/
+                           
                                 if (activeEnemies[e].PosY == i && activeEnemies[e].PosX == j)
                                 {
                                     if (activeEnemies[e].CurHp <= 0)
@@ -208,7 +171,7 @@
                                     return;
                                 }
 
-                           // }
+                          
                         }
                     }
 
@@ -454,7 +417,7 @@
 
         public void GachaTower()
         {
-            if (StageManager.GetGold() >= 50)
+            if (StageManager.GetGold() >= 50 &&  Map.pixelNum[player.PosY, player.PosX] < PixelType.OVERLAPPLAYERENEMY)
             {
                 if (CheckTowerCursor() == false)
                 {

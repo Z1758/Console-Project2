@@ -38,7 +38,7 @@ namespace ConsoleProject2
             {
                 Map.DynamicRandomDraw();
             }
-
+            
            
             gameManager.CheckDraw();
 
@@ -105,7 +105,8 @@ namespace ConsoleProject2
             int.TryParse(Console.ReadLine() , out select);
 
             mode = select;
-          
+            ClearBuffer();
+            Console.Clear();
         }
 
         //키 입력 버퍼 지우기

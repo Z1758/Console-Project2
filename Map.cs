@@ -309,12 +309,14 @@ namespace ConsoleProject2
                 for (int j = borderPos+1; j <= widthBorder-1; j++)
                 {
 
-                    if (pixelNum[i, j] == PixelType.OVERLAPPLAYER)
+                    if (pixelNum[i, j] == PixelType.OVERLAPPLAYERENEMY)
                     {
                         continue;
                     }
 
-                    if (pixelNum[i,j] > PixelType.USERSPACE && pixelNum[i, j] != PixelType.PLAYER)
+                    if (pixelNum[i,j] > PixelType.USERSPACE && 
+                        pixelNum[i, j] != PixelType.PLAYER && 
+                        pixelNum[i,j] < PixelType.GRADE_C)
                     {
                         continue;
                     }
@@ -348,7 +350,7 @@ namespace ConsoleProject2
                 Console.Write(" ");
             }
 
-            Console.WriteLine($"       남은 시간 {TimeManager.roundCount:00}");
+            Console.WriteLine($"     라운드 시간 {TimeManager.roundCount:00}");
             Console.WriteLine();
             Console.ResetColor();
 
@@ -461,6 +463,12 @@ namespace ConsoleProject2
                             Console.ForegroundColor = ConsoleColor.Black;
                             Console.BackgroundColor = ConsoleColor.White;
                             break;
+                        case PixelType.OVERLAPPLAYERPATH:
+                            //적 길 위에 있는 유저 
+
+                            Console.ForegroundColor = ConsoleColor.Black;
+                            Console.BackgroundColor = ConsoleColor.White;
+                            break;
                         default:
                             Console.ForegroundColor = ConsoleColor.White;
                             break;
@@ -507,7 +515,7 @@ namespace ConsoleProject2
 
 
                     }
-                    else if (PixelType.GRADE_C > pixelNum[i, j] && pixelNum[i, j] >= PixelType.OVERLAPPLAYER)
+                    else if (PixelType.OVERLAPPLAYERPATH > pixelNum[i, j] && pixelNum[i, j] >= PixelType.OVERLAPPLAYERENEMY)
                     {
                         //적과 플레이어 오버랩
                         Console.ForegroundColor = ConsoleColor.Black;
@@ -515,7 +523,7 @@ namespace ConsoleProject2
 
                         pixel[i, j] = 'E';
                         Console.Write(pixel[i, j]);
-                        Console.Write(pixelNum[i, j] - PixelType.OVERLAPPLAYER - PixelType.ENEMY + 1);
+                        Console.Write(pixelNum[i, j] - PixelType.OVERLAPPLAYERENEMY - PixelType.ENEMY + 1);
 
 
 
