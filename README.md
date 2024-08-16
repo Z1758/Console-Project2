@@ -2,7 +2,7 @@
 
 
 
-![](https://github.com/Z1758/ConsoleProject2_Image/blob/main/1.png)
+![1](https://github.com/user-attachments/assets/494b64e0-bc8c-4880-baeb-b4d30ce9fca4)
 
 
 
@@ -16,7 +16,7 @@
 
 
 
-![](https://github.com/Z1758/ConsoleProject2_Image/blob/main/2.jpg)
+![2](https://github.com/user-attachments/assets/d6302c9e-8eed-4b15-93e0-bf27a1f51cbe)
 
 조잡하게 완성 된 구상도
 <br/><br/><br/>
