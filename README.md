@@ -2,7 +2,8 @@
 
 
 
-![i15607426341](https://github.com/user-attachments/assets/8d3c970f-eb84-4a39-9522-4c60bf74691e)
+![](https://github.com/Z1758/ConsoleProject2_Image/blob/main/1.png)
+
 
 
 어떤 게임을 만들어볼까 고민 하던 중 
@@ -15,7 +16,7 @@
 
 
 
-![새 캔버스](https://github.com/user-attachments/assets/e20ca75c-2866-484c-9e0e-cbbeefc8e987)
+![](https://github.com/Z1758/ConsoleProject2_Image/blob/main/2.jpg)
 
 조잡하게 완성 된 구상도
 <br/><br/><br/>
