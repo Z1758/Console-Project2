@@ -180,9 +180,9 @@ Queue에 적의 길을 넣어두고 사용하니 훨씬 간단해졌다
 
 적의 정보는 StageManager의 딕셔너리에 저장 하고 
 
-스테이지 레벨에 맞춰 정보를 꺼내며 생성 되는 적들에 초기화를 해준다
+스테이지 레벨에 맞춰 정보를 꺼내며 생성 되는 적들에 초기화를 해준다<br/>
 
-<br/>
+
 ### 이동
 
 ![ezgif-1-442d11ff1d](https://github.com/user-attachments/assets/a8dfb8b6-2733-4002-ae9c-e9e5f2271201)
