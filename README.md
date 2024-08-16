@@ -549,6 +549,18 @@ ___
 
 # 끝
 _______
+
+![완성1](https://github.com/user-attachments/assets/4620bd23-543f-436a-b6f8-2af0d3fac3b2)
+
+<br/>
+어찌저찌 게임이 완성 되었다<br/><br/>
+
+![완성2](https://github.com/user-attachments/assets/a5e64925-c4c6-4780-ae28-093c9133a517)
+
+
+너무 쉽다 밸런스 조절에 실패했다
+
+
 ![제목 없음-1](https://github.com/user-attachments/assets/fc83150d-dfc4-4322-909b-fb185dd180f2)
 
 전체적인 씬의 흐름은 대략 이렇다
