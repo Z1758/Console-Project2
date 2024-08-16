@@ -216,9 +216,9 @@ Queue에 적의 길을 넣어두고 사용하니 훨씬 간단해졌다
 
 ![6](https://github.com/user-attachments/assets/191cd480-33d5-44f6-809d-9be255dea847)
 
-그리고 타이머를 적용해 매 초 마다 적을 생성하게 했다
+그리고 타이머를 적용해 매 초 마다 적을 생성하게 했다<br/>
 
-<br/>
+
 ### 제거
 
 ![ezgif-7-f3f52b3b50](https://github.com/user-attachments/assets/70c48b26-4f1d-46cc-8df9-52b34c7c969c)
@@ -261,10 +261,10 @@ GameManager의 이벤트를 호출하면서
 
 타워의 생성은 랜덤으로 값을 받아오고 그 값에 맞는 타워의 정보를 
 
-Queue에서 꺼내온 타워 객체에 초기화 해준다
+Queue에서 꺼내온 타워 객체에 초기화 해준다<br/>
 
 
-<br/>
+
 ## 공격
 
 타이머를 통해 행동 하는 것은 비슷하나 
@@ -307,9 +307,9 @@ Player는 GameManager의 인스턴스로 저장 했다
 ### 이동
 ![13](https://github.com/user-attachments/assets/532cfdef-ec9c-442c-8b63-98ee438e7d2a)
 
-이동의 구현은 화살표 키 입력을 받고 범위를 제한한 좌표 값만 변경 해주면 되기 때문에 간단했다
+이동의 구현은 화살표 키 입력을 받고 범위를 제한한 좌표 값만 변경 해주면 되기 때문에 간단했다<br/>
 
-<br/>
+
 ### 타워 뽑기
 
 ![14](https://github.com/user-attachments/assets/2952fce2-fb8f-4b87-b1c6-5fce5df27a2f)
@@ -429,9 +429,9 @@ StageManager에 저장된 골드 변수의 값이 감소하며
 
 대충 이런 느낌이 되지 않을까
 
-일단 테스트용 프로젝트를 만들자
+일단 테스트용 프로젝트를 만들자<br/>
 
-<br/>
+
 # 미로
 ----
 
@@ -454,10 +454,10 @@ StageManager에 저장된 골드 변수의 값이 감소하며
 
 ![9b9daa0df048eabc82c659bc7967670d](https://github.com/user-attachments/assets/c4d83262-3d68-4a95-ae46-293aae005260)
 
-걱정 했는데 금방 만들어서 다행이다
+걱정 했는데 금방 만들어서 다행이다<br/>
 
 
-<br/>
+
 # A*
 ____
 
@@ -476,7 +476,7 @@ ____
 
 ![156c5b1fddf2f5a4e](https://github.com/user-attachments/assets/eb6d2291-c027-4004-ba18-13161b4a7617)
 
-# 카피
+### 카피
 
 
 ![m_1584583752_4411_1583802953ed991efcf5ae428497f50fc842678a50__mn773959__w504__h468__f38536__Ym202003 1](https://github.com/user-attachments/assets/4d28b1fc-3c05-427c-8a19-af3636873edb)
@@ -521,12 +521,13 @@ ___
 
 ![30](https://github.com/user-attachments/assets/99fc393d-5fd9-4176-8436-6f8eb1d71040)
 
-잘 찾아간다
+잘 찾아간다<br/><br/>
   
 
 
 ![20220311083837_1EfHk5lPk0](https://github.com/user-attachments/assets/df05ed69-b2a1-406c-a232-1c947a227904)
-하지만 만들고 나서 든 생각이지만 이러면 굳이 미로가 될 필요가 있을까?
+
+하지만 만들고 나서 든 생각이지만 이러면 굳이 미로가 될 필요가 있을까?<br/>
 
   
 ![31](https://github.com/user-attachments/assets/14bcad91-e9eb-4b24-b879-8ee2863bf1f3)
@@ -538,10 +539,10 @@ ___
 
 ![32](https://github.com/user-attachments/assets/700649f4-81d6-4592-95d7-76bf3a934880)
 
-적이 지나는 길에 타워가 생성 되거나 
-플레이어와 적의 좌표가 오버랩 되면 적이 이상하게 나오는 등 
-여러 버그가 있었으나 수정하고 
-적이 목적지에 도달 했을 때 플레이어의 체력이 줄어드는 것까지 구현하였다
+적이 지나는 길에 타워가 생성 되거나 <br/>
+플레이어와 적의 좌표가 오버랩 되면 적이 이상하게 나오는 등 <br/>
+여러 버그가 있었으나 수정하고 <br/>
+적이 목적지에 도달 했을 때 플레이어의 체력이 줄어드는 것까지 구현하였다<br/><br/>
 
   
   
